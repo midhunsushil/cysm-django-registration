@@ -26,7 +26,7 @@ $(document).ready(function() {
 
       });
 
-      // On Dropdown Item Click
+      // On Dropdown Item 
       $('.form-selector .dropdown-item').not(".disabled").click(function() {
 
         console.log("Clicked " + $(this).text());
