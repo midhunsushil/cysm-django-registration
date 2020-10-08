@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>First App</title>
+
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+</head>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Bubblegum+Sans&display=swap');
+
+  p {
+    font-size: 1.5em;
+    font-family: 'Bubblegum Sans', cursive;
+    color: #9900cc;
+  }
+
+  body {
+    font-family: 'Bubblegum Sans', cursive;
+  }
+
+  .table {
+    table-layout: auto;
+    border-collapse: collapse;
+    white-space: nowrap;
+    width: auto;
+  }
+
+  table td {
+    white-space: nowrap;
+  }
+
+</style>
+
+<body>
+  <h1>This is index.html ! for my_first_app</h1>
+  <p>{{var_para}}</p>
+  {% load static %}
+  <img src="{% static "my_first_app/images/logo.png" %}" alt="Logo">
+
+  {% if login_records %}
+  <div class="login_records">
+    <h4>Login Records</h4>
+    <table class="table table-border table-striped">
+      <thead class="thead-dark">
+        <th> # </th>
+        <th>Username</th>
+        <th>Password</th>
+      </thead>
+      {% for acc in login_records %}
+      <tr>
+        <td>{{ forloop.counter }}</td>
+        <td>{{ acc.username }}</td>
+        <td>{{ acc.password }}</td>
+      </tr>
+      {% endfor %}
+    </table>
+  </div>
+  {% else %}
+  <h4>No Login Records Found</h4>
+  {% endif %}
+</body>
+
+</html>

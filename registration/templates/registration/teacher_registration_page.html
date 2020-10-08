@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+
+{% extends "registration\base.html" %}
+{% load widget_tweaks %}
+{% load static %}
+
+{% block title %}<title>Teacher - Register</title>{% endblock title %}
+
+{% block css %}
+<link rel="stylesheet" href="{% static "registration\css\upload-field.css" %}">
+<link rel="stylesheet" href="{% static "registration\css\reg_page.css" %}">
+{% endblock css %}
+
+{% block style1 %}
+<style media="screen">
+  .head.jumbotron {
+    background-color: rgba(255, 226, 223, 0.7);
+  }
+</style>
+{% endblock style1 %}
+
+{% block script-content %}
+<script type="text/javascript">
+  $(document).ready(function() {
+    //jquery add active page to nav-bar
+    $(".navbar-nav .nav-item.teacher-reg-page").addClass("active");
+
+    //Image Model Show on Image Click
+    $(".img-responsive").click(function() {
+      $("#imageModel").modal("show");
+    });
+
+    // Student Record Upload Type (hide/show)
+    $('input[name="upload_type"]').click(function() {
+      var inputValue = $(this).attr("value");
+      var targetBox = "." + inputValue;
+      $(".upload_type_select").not(targetBox).hide();
+      $(".upload_type_select" + " input").not(targetBox).prop("required", false);
+      // $(".upload_type_select"+targetBox+" input").prop("required",true);
+      $(".upload_type_select" + targetBox).show();
+    });
+  });
+</script>
+{% endblock script-content %}
+
+{% block jumbotron_body %}
+<h1>Teacher Details</h1>
+{% endblock jumbotron_body %}
+
+{% block body-content %}
+<!-- FORM STARTING -->
+<form class="dropzone" method="post" enctype="multipart/form-data">
+
+  {% csrf_token %}
+
+  <div class="container my-2">
+    <div class="jumbotron">
+
+      {% for field in form_teacher_details %}
+      <div class="form-group col-md-11 col-lg-8 p-0">
+
+        {{ field.label_tag }}
+        {{ field|add_class:"form-control" }}
+        {{ field.errors }}
+
+      </div>
+      {% endfor %}
+
+    </div>
+  </div>
+
+  <div class="container my-2 upload-info">
+    <div class="jumbotron">
+      <h2>Student Record Upload Instructions</h2>
+      <h6 class="text-secondary" style="font-family: 'Courier New'">Please read this before proceeding !</h6>
+      <ul class="list-group list-group-flush">
+        <li class="list-group-item">
+          <span class="index">1.</span>
+          <span class="data">
+            Click
+            <a class="stretched-link" href="https://docs.google.com/spreadsheets/d/1mNVfg2ozc3WEZQTqJmnDyxar6upgNIYa0D55VdYN8bc/copy">here</a>
+            to get the spreadsheet format template to be shared in url.
+          </span>
+        </li>
+        <li class="list-group-item">
+          <span class="index">2.</span>
+          <span class="data">
+            Click <strong>"Make a copy"</strong> to make a copy to your account.
+          </span>
+        </li>
+        <li class="list-group-item">
+          <span class="index">3.</span>
+          <span class="data">
+            Alternatively you can
+            <a href="{% static "registration\files\Student Record.xlsx" %}">download the format template</a>
+            and upload it to skip the below steps. Populate the spreadsheet template with student records.
+          </span>
+        </li>
+        <li class="list-group-item">
+          <span class="index">4.</span>
+          <span class="data">
+            When you are done editing, click <strong>Share</strong> button.
+          </span>
+        </li>
+        <li class="list-group-item">
+          <span class="index">5.</span>
+          <span class="data">
+            Give permission to <strong>"Anyone with the link"</strong> and copy the link. (See image below)
+          </span>
+        </li>
+        <!-- Tutorial Image -->
+        <li class="list-group-item">
+          <img class="img-responsive" src="{% static "registration\images\share_permission.jpg" %}" width="100%" height="auto" alt="Share Permission looks like this..">
+          <!-- Image Model   -->
+          <div id="imageModel" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-xl">
+              <div class="modal-content">
+                <div class="modal-body">
+                  <img src="{% static "registration\images\share_permission.jpg" %}" width="100%" height="auto" alt="Share Permission looks like this.." >
+                </div>
+              </div>
+            </div>
+          </div>
+        </li>
+        <li class="list-group-item">
+          <span class="index">6.</span>
+          <span class="data">
+            Paste the link below.
+          </span>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="container my-2">
+    <div class="jumbotron">
+      <!-- Upload Type -->
+      <div class="form-group">
+
+        {% for radio in form.upload_type %}
+
+        <div class="form-check form-check-inline">
+          <span class="form-check-input">{{ radio.tag }}</span>
+          <label class="form-check-label" for="{{ radio.id_for_label }}">{{ radio.choice_label }}</label>
+        </div>
+
+        {% endfor %}
+        {{ form.upload_type.errors }}
+
+      </div>
+
+      <!-- Url Input Field [DEFAULT Option] [Check Django Form to change default option] -->
+      <div class="form-group col-md-11 col-lg-8 p-0 upload_type_select URL">
+
+        {{ form.url.label_tag }}
+        {{ form.url|add_class:"form-control"|attr:"required" }}
+        {{ form.url.errors }}
+
+      </div>
+      <!-- File Upload Field -->
+      <!-- <form id="fileUploadForm" method="post" enctype="multipart/form-data"> -->
+      <div class="form-group upload_type_select dropzone__box Upload" style="display: none;">
+
+        <img class="box__icon" src="{% static "\registration\images\upload-file.svg" %}" alt="Upload Icon">
+        {{ form.upload | add_class:"box__file" | attr:"data-multiple-caption:{count} files selected" | attr:"multiple"}}
+        <label for="id_upload"><strong>Choose a file</strong><span class="box__dragndrop"> or drag it here</span>.</label>
+        {{ form.upload.errors }}
+
+      </div>
+      <!-- </form> -->
+
+      <button type="submit" class="btn btn-primary" name="submit">Submit</button>
+      <p id="testpara"></p>
+
+    </div>
+  </div>
+</form>
+<!-- FORM ENDING -->
+{% endblock body-content %}

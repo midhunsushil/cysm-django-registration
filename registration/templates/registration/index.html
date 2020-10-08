@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+
+{% extends "registration\base.html" %}
+{% load static %}
+
+{% block title %}<title>Registration - Register your School with CyberSmarties</title>{% endblock title %}
+
+{% block css %}
+<link rel="stylesheet" href="{% static 'registration\css\index_page.css' %}">
+{% endblock css %}
+
+{% block js %}
+<script src="{% static "registration\js\index_page.js" %}"></script>
+{% endblock js %}
+
+{% block style1 %}
+<style>
+  .bg {
+    background-image: url("{% static '/registration/images/bg_image_3.png' %}");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: 400px auto;
+    background-color: #e3d3ee;
+  }
+</style>
+{% endblock %}
+
+{% block script-content %}
+<script type="text/javascript">
+</script>
+{% endblock script-content %}
+
+{% block jumbotron_body %}
+
+<h1>Register your School</h1>
+<h5>Try:</h5>
+<ul>
+  <li><a href="{% url 'my_first_app:login' %}" style="text-decoration: none">
+      <h5>/login</h5>
+    </a></li>
+  <li><a href="{% url 'admin:index' %}" style="text-decoration: none">
+      <h5>/admin</h5>
+    </a></li>
+</ul>
+
+{% endblock %}
+
+{% block body-content %}
+
+<div class="container my-2 hovercheck">
+  <div class="jumbotron">
+    <div class="row">
+      <div class="col form-selector">
+        <span class="text">I am school's</span>
+        <div class="btn-group dropdown">
+          <button class="btn btn-secondary bgc-school" type="button" id="i-am-selection" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Principal
+          </button>
+          <div class="dropdown-menu" aria-labelledby="i-am-selection">
+            <a class="dropdown-item school" href="#" bgc-toggle-class="bgc-school">Principal</a>
+            <a class="dropdown-item teacher" href="#" bgc-toggle-class="bgc-teacher">Teacher</a>
+            <a class="dropdown-item student" href="#" bgc-toggle-class="bgc-student">Student</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock body-content %}

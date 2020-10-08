@@ -1,0 +1,53 @@
+.jumbotron,  .jumbotron.head {
+    background-color: rgba(233, 236, 239, 0.8);
+  }
+
+  .form-selector .btn-group>button#i-am-selection{
+    /* font-size: 38px; */
+    border-radius: 33px;
+    padding: 0px 20px;
+    font-size: 33px;
+    color: white;
+    /* background-color: lightgray; */
+    border: none;
+    outline: none;
+    margin-bottom: 2px;
+  }
+
+  .dropdown-item:hover {
+    outline: none;
+  }
+
+  .bgc-school, .dropdown-item:hover.school, .bgc-school:focus{
+    background-color: #B1E9FF;
+  }
+
+  .bgc-teacher, .dropdown-item:hover.teacher, .bgc-teacher:focus {
+    background-color: #FFCBC6;
+  }
+
+  .bgc-student, .dropdown-item:hover.student, .bgc-student:focus {
+    background-color: #a8d578;
+  }
+
+  .form-selector.col {
+    text-align: center;
+      font-size: 38px;
+  }
+
+  .form-selector.col .text{
+    color: #9900cc;
+    display: inline-block;
+  }
+
+  .col.form-selector {
+    /* border: 0.5px solid red; */
+  }
+
+  .btn-group.dropdown .dropdown-menu {
+
+      margin-top: 10px;
+      font-size: 25px;
+      border-radius: 20px;
+      overflow: hidden;
+  }

@@ -1,0 +1,33 @@
+.dropzone .jumbotron {
+  background-color: rgba(254, 245, 239, 0.7);
+}
+
+.school-form .jumbotron {
+  background-color: rgba(216, 250, 255, 0.7);
+}
+
+.upload-info * {
+  background-color: rgba(0, 0, 0, 0);
+}
+
+.upload-info .list-group-flush>.list-group-item {
+    border-width: 0 0 1.7px;
+    border-color: rgba(0,0,0,.125);
+}
+
+.upload-info .list-group-item .index {
+  margin-right: 7px;
+}
+
+.upload-info .list-group-item {
+  display: flex;
+  justify-content: flex-start;
+}
+
+.upload-info .list-group-item .data {
+
+}
+
+.upload-info h2 {
+  color: #9900cc;
+}
