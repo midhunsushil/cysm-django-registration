@@ -7,6 +7,7 @@
     border-radius: 33px;
     padding: 0px 20px;
     font-size: 33px;
+    width: 149px;
     color: white;
     /* background-color: lightgray; */
     border: none;
@@ -38,6 +39,21 @@
   .form-selector.col .text{
     color: #9900cc;
     display: inline-block;
+  }
+
+  .form-selector button.continue svg{
+    color: #345b74;
+    height: 43px;
+    width: auto;
+  }
+
+  .form-selector button.continue svg:hover{
+    color: 	#f1641e;
+  }
+
+  .form-selector button.continue {
+    display: inline-block;
+    color: #b6e8ec;
   }
 
   .col.form-selector {

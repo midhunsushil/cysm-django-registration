@@ -61,3 +61,24 @@ class Teacher_Info(models.Model) :
     def __str__(self):
         # Displays Object in the form "<full_name> (<teacher_id>)"
         return "{0} ({1})".format(self.full_name, self.teacher_id)
+
+class Enquiry_Data(models.Model) :
+
+    # Choices for upload_type
+    class IAmChoices(models.TextChoices):
+        principal = 'Principal', _('Principal')
+        teacher = 'Teacher', _('Teacher')
+        student = 'Student', _('Student')
+        staff = 'Staff', _('Staff')
+
+    name = models.CharField(verbose_name = "Name*", max_length = 100)
+    i_am = models.CharField(max_length = 10, choices = IAmChoices.choices, default = IAmChoices.staff)
+    contact_number = models.CharField(verbose_name = "Contact Number*", max_length = 12, validators = [number_check])
+    email = models.EmailField(verbose_name = "Email*", max_length = 50)
+    school_name = models.CharField(verbose_name = "School Name*", max_length = 100)
+    school_city = models.CharField(verbose_name = "School City*", max_length = 20)
+    awareness = models.CharField(verbose_name = "Where did you hear about us ?", max_length = 100, blank = True)
+
+    def __str__(self):
+        # Displays Object in the form "<IAmChoice>@<school_name>"
+        return "{0}@{1}".format(self.i_am, self.school_name)

@@ -26,16 +26,6 @@ $(document).ready(function() {
 
       });
 
-      // On Dropdown Item Click
-      $('.form-selector .dropdown-item').not(".disabled").click(function() {
-
-        console.log("Clicked " + $(this).text());
-        $active_selection = $(this);
-        console.log("Active Selection: " + $active_selection.text());
-        update_selection($active_selection);
-
-      });
-
     },
     function hoverOut() {
 
@@ -43,6 +33,16 @@ $(document).ready(function() {
         $('#i-am-selection').dropdown('hide');
 
       });
+
+    });
+
+    // On Dropdown Item Click
+    $('.form-selector .dropdown-item').click(function() {
+
+      console.log("Clicked " + $(this).text());
+      $active_selection = $(this);
+      console.log("Active Selection: " + $active_selection.text());
+      update_selection($active_selection);
 
     });
 
@@ -62,5 +62,13 @@ $(document).ready(function() {
     update_bgc_class($active_selection)
     console.log("Updated 'I am Selection' : " + bgc_class);
   }
+
+  //Redirect to Enquiry Page
+  $(".form-selector button.continue").click(function () {
+    console.log("Clicked Continue");
+    url = "enquiry"
+    data = "?choice="+$active_selection.text()
+    window.location.href = url+data
+  });
 
 });

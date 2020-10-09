@@ -32,16 +32,8 @@
 
 {% block jumbotron_body %}
 
-<h1>Register your School</h1>
-<h5>Try:</h5>
-<ul>
-  <li><a href="{% url 'my_first_app:login' %}" style="text-decoration: none">
-      <h5>/login</h5>
-    </a></li>
-  <li><a href="{% url 'admin:index' %}" style="text-decoration: none">
-      <h5>/admin</h5>
-    </a></li>
-</ul>
+<h1>Want to know more about CyberSmarties ?</h1>
+<h5>Enquire on us below</h5>
 
 {% endblock %}
 
@@ -57,11 +49,14 @@
             Principal
           </button>
           <div class="dropdown-menu" aria-labelledby="i-am-selection">
-            <a class="dropdown-item school" href="#" bgc-toggle-class="bgc-school">Principal</a>
-            <a class="dropdown-item teacher" href="#" bgc-toggle-class="bgc-teacher">Teacher</a>
-            <a class="dropdown-item student" href="#" bgc-toggle-class="bgc-student">Student</a>
+            <a class="dropdown-item school" bgc-toggle-class="bgc-school">Principal</a>
+            <a class="dropdown-item teacher" bgc-toggle-class="bgc-teacher">Teacher</a>
+            <a class="dropdown-item student" bgc-toggle-class="bgc-student">Student</a>
           </div>
         </div>
+        <button type="button" class="btn continue" name="continue">
+          {% include 'registration\test.svg' %}
+        </button>
       </div>
     </div>
   </div>
