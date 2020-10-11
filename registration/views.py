@@ -54,20 +54,27 @@ def thankyou_enquiry(request) :
 
     return render(request, "registration/thank_you.html")
 
-
+# School Registration Form
 def school_reg(request) :
 
     form = SchoolForm()
+    formset = class_section_formset()
 
     if request.method == "POST" :
 
         print("Post Request Recieved !")
         form = SchoolForm(request.POST)
+        formset = class_section_formset(request.POST)
 
-        if form.is_valid() :
+        if form.is_valid() and formset.is_valid():
 
             print("Form Data Valid")
-            form.save()
+            school = form.save()
+            for _form in formset :
+                section = _form.save(commit=False)
+                section.school = school
+                section.save()
+
             mail(form)
             return index(request)
             # Reset Form
@@ -79,6 +86,7 @@ def school_reg(request) :
 
     dict = {
         'form' : form,
+        'formset' : formset,
     }
     return render(request, "registration/school_registration_page.html", context = dict )
 
@@ -113,8 +121,8 @@ def teacher_reg(request) :
 def mail(SchoolForm) :
 
     text = "Recieved User Submit ! This needs more work\n"
-    values = "School Name: {0}\nCity: {1}\nPrincipal Name: {2}\nPhone: {3}".format(SchoolForm.cleaned_data['school_name'], SchoolForm.cleaned_data['city'], SchoolForm.cleaned_data['principal_name'], SchoolForm.cleaned_data['principal_phone_no'])
-    send_mail('User Submit', text+values, 'iAmRoony@cysm-dev.xyz', ['reber23046@zuperholo.com', 'prahladkakkattu@gmail.com'])
+    values = "School Name: {0}\nPhone: {1}\nEnrolements to CS: {2}".format(SchoolForm.cleaned_data['school_name'], SchoolForm.cleaned_data['contact_number'], SchoolForm.cleaned_data['enrolements_to_CS'])
+    send_mail('User Submit', text+values, 'iAmRoony@cysm-dev.xyz', ['wewovo6066@deselling.com', 'midhunpandaraparambilsushil.cs18@bitsathy.ac.in'])
     print("Mail sent")
 
 def test(request) :

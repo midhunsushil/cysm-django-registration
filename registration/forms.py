@@ -1,5 +1,6 @@
 from django import forms
-from registration.models import Teacher_Info, School_Info, Enquiry_Data
+from django.forms import formset_factory
+from registration.models import Teacher_Info, School_Info, Enquiry_Data, Class_Section
 
 # Create your forms here.
 
@@ -7,7 +8,16 @@ class SchoolForm(forms.ModelForm) :
 
     class Meta() :
         model = School_Info
-        fields = ["school_name", "city", "state", "principal_name", "principal_phone_no", "no_of_students", ]
+        fields = ["school_name", "school_code", "contact_number", "enrolements_to_CS", "no_of_teachers", ]
+
+class ClassSectionForm(forms.ModelForm) :
+
+    class Meta() :
+        model = Class_Section
+        fields = ["class_no", "section", "teacher_email", "contact_number"]
+
+# Formset of above Form
+class_section_formset = formset_factory(ClassSectionForm, extra = 1)
 
 class TeacherForm(forms.ModelForm) :
 
