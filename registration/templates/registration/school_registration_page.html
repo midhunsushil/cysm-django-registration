@@ -1,18 +1,18 @@
 <!DOCTYPE html>
 
-{% extends "registration\base.html" %}
+{% extends "registration/base.html" %}
 {% load widget_tweaks %}
 {% load static %}
 
 {% block title %}<title>School - Register</title>{% endblock title %}
 
 {% block css %}
-<link rel="stylesheet" href="{% static "registration\css\reg_page.css" %}">
+<link rel="stylesheet" href="{% static "registration/css/reg_page.css" %}">
 {% endblock css %}
 
 <!-- JavaScript -->
 {% block js %}
-<script type="text/javascript" src="{% static "registration\js\school_reg_page.js" %}"></script>
+<script type="text/javascript" src="{% static "registration/js/school_reg_page.js" %}"></script>
 {% endblock js %}
 
 {% block style1 %}
@@ -120,8 +120,8 @@
         </div>
         <div class="col-md-1">
           <button class="btn-clone add-form-btn" type="button" name="add/remove">
-            <span class="plus">{% include 'registration\plus-circle.svg' %}</span>
-            <span class="minus">{% include 'registration\minus-circle.svg' %}</span>
+            <span class="plus">{% include 'registration/plus-circle.svg' %}</span>
+            <span class="minus">{% include 'registration/minus-circle.svg' %}</span>
           </button>
         </div>
       </div>
