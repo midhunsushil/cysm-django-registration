@@ -53,6 +53,9 @@
         <li class="nav-item indexPage">
           <a class="nav-link" href="{% url 'index'%}">Index <span class="sr-only">(current)</span></a>
         </li>
+        <li class="nav-item enquiryPage">
+          <a class="nav-link" href="{% url 'enquiry'%}?choice=Principal">Enquiry</a>
+        </li>
         <li class="nav-item school-reg-page">
           <a class="nav-link" href="{% url 'school-reg'%}">School</a>
         </li>
@@ -118,7 +121,7 @@
   {% block navbar %}
 
   {% endblock %}
-  <div class="container my-2">
+  <div class="container my-2 head">
     <div class="jumbotron head">
       {% block jumbotron_body %}
       {% endblock %}

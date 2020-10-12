@@ -6,6 +6,10 @@
   background-color: rgba(216, 250, 255, 0.7);
 }
 
+.enquiry-form .jumbotron {
+  background-color: rgba(254, 222, 245, 0.7);
+}
+
 .upload-info * {
   background-color: rgba(0, 0, 0, 0);
 }

@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+
+{% extends "registration\base.html" %}
+{% load static %}
+
+{% block title %}<title>Thank you for your time</title>{% endblock title %}
+
+{% block css %}
+<link rel="stylesheet" href="{% static 'registration\css\index_page.css' %}">
+{% endblock css %}
+
+{% block js %}
+{% endblock js %}
+
+{% block style1 %}
+<style>
+  .bg {
+    background-image: url("{% static '/registration/images/happy-day.png' %}");
+    background-position: 10% 98%;
+    background-repeat: no-repeat;
+    background-size: 149px 230px;
+    background-color: #e3d3ee;
+  }
+
+  .jumbotron.thankyou {
+    background-color: rgba(125, 125, 125, 0.5);
+    /* max-width: 816px; */
+  }
+
+  .jumbotron.thankyou h1 {
+    color: rgba(255, 255, 255, 0.8);
+  }
+
+  .jumbotron.thankyou h5 span {
+    color: #fff7ff;
+  }
+
+  .container.my-2.head {
+    display: none;
+  }
+
+  .container.thankyou {
+    background-image: url("{% static '/registration/images/rainbow_img.gif' %}");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-color: #e3d3ee;
+    /* padding: 50px; */
+    border-radius: 7px;
+    display: flex;
+    justify-content: center;
+  }
+</style>
+{% endblock %}
+
+{% block script-content %}
+<script type="text/javascript">
+  $(document).ready(function() {
+    var delay = 10000;
+    console.log("starting timeout");
+    window.setTimeout(function() {
+      window.location = '/register';
+      console.log("expired");
+    }, delay);
+  })
+</script>
+{% endblock script-content %}
+
+{% block jumbotron_body %}
+<span>
+  <!-- Nothing Here -->
+</span>
+{% endblock %}
+
+{% block body-content %}
+
+<div class="container my-5 thankyou p-2 p-sm-4">
+  <div class="thankyou jumbotron mx-lg-5 mx-3">
+    <h1>Your are in the books.</h1>
+    <h5><span>Thank you</span> for your interest! 😃 <br> We have received your enquiry and will respond to you as soon as possible.</h5>
+  </div>
+</div>
+
+{% endblock body-content %}

@@ -23,8 +23,7 @@ def user_directory_path(instance, filename):
     currentDateTime = datetime.datetime.now().strftime("%c")
     FILE,EXT = os.path.splitext(filename)
     BASE_DIR = "registration/student_record"
-    # file will be uploaded to :
-    # MEDIA_ROOT/registration/student_record/instance/<filename>-<currentDateTime><extension>
+    # File will be uploaded to MEDIA_ROOT/registration/student_record/instance/<filename>-<currentDateTime><extension>
     return '{0}/{1}/{2}-{3}{4}'.format(BASE_DIR, instance, FILE, currentDateTime, EXT)
 
 # Create your models here.
@@ -32,14 +31,29 @@ def user_directory_path(instance, filename):
 class School_Info(models.Model) :
 
     school_name = models.CharField(verbose_name = "School Name", max_length = 100)
-    city = models.CharField(max_length = 20)
-    state = models.CharField(max_length = 20)
-    principal_name = models.CharField(max_length = 100)
-    principal_phone_no = models.CharField(max_length = 12, unique = True, validators = [number_check])
-    no_of_students = models.PositiveIntegerField()
+    school_code = models.CharField(max_length = 20)
+    # city = models.CharField(max_length = 20)
+    # state = models.CharField(max_length = 20)
+    # principal_name = models.CharField(max_length = 100)
+    contact_number = models.CharField(max_length = 12, unique = True, validators = [number_check])
+    enrolements_to_CS = models.PositiveIntegerField()
+    no_of_teachers = models.PositiveIntegerField()
 
     def __str__(self):
         return self.school_name
+
+class Class_Section(models.Model) :
+
+    school = models.ForeignKey(School_Info, on_delete=models.CASCADE)
+    class_no = models.PositiveIntegerField(verbose_name = "Class")
+    section = models.CharField(max_length = 3)
+    teacher_email = models.EmailField(max_length = 50)
+    contact_number = models.CharField(max_length = 12, validators = [number_check])
+
+    def __str__(self) :
+        # Displays Object in the form "<class_>-<section>"
+        school_name = str(self.school)
+        return "{0}-{1}@{2}".format(self.class_no, self.section, school_name)
 
 class Teacher_Info(models.Model) :
 
@@ -61,3 +75,24 @@ class Teacher_Info(models.Model) :
     def __str__(self):
         # Displays Object in the form "<full_name> (<teacher_id>)"
         return "{0} ({1})".format(self.full_name, self.teacher_id)
+
+class Enquiry_Data(models.Model) :
+
+    # Choices for upload_type
+    class IAmChoices(models.TextChoices):
+        principal = 'Principal', _('Principal')
+        teacher = 'Teacher', _('Teacher')
+        student = 'Student', _('Student')
+        staff = 'Staff', _('Staff')
+
+    name = models.CharField(verbose_name = "Name*", max_length = 100)
+    i_am = models.CharField(max_length = 10, choices = IAmChoices.choices, default = IAmChoices.staff)
+    contact_number = models.CharField(verbose_name = "Contact Number*", max_length = 12, validators = [number_check])
+    email = models.EmailField(verbose_name = "Email*", max_length = 50)
+    school_name = models.CharField(verbose_name = "School Name*", max_length = 100)
+    school_city = models.CharField(verbose_name = "School City*", max_length = 20)
+    awareness = models.CharField(verbose_name = "Where did you hear about us ?", max_length = 100, blank = True)
+
+    def __str__(self):
+        # Displays Object in the form "<IAmChoice>@<school_name>"
+        return "{0}@{1}".format(self.i_am, self.school_name)
