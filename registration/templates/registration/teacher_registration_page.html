@@ -1,14 +1,14 @@
 <!DOCTYPE html>
 
-{% extends "registration\base.html" %}
+{% extends "registration/base.html" %}
 {% load widget_tweaks %}
 {% load static %}
 
 {% block title %}<title>Teacher - Register</title>{% endblock title %}
 
 {% block css %}
-<link rel="stylesheet" href="{% static "registration\css\upload-field.css" %}">
-<link rel="stylesheet" href="{% static "registration\css\reg_page.css" %}">
+<link rel="stylesheet" href="{% static "registration/css/upload-field.css" %}">
+<link rel="stylesheet" href="{% static "registration/css/reg_page.css" %}">
 {% endblock css %}
 
 {% block style1 %}
@@ -92,7 +92,7 @@
           <span class="index">3.</span>
           <span class="data">
             Alternatively you can
-            <a href="{% static "registration\files\Student Record.xlsx" %}">download the format template</a>
+            <a href="{% static "registration/files/Student Record.xlsx" %}">download the format template</a>
             and upload it to skip the below steps. Populate the spreadsheet template with student records.
           </span>
         </li>
@@ -110,13 +110,13 @@
         </li>
         <!-- Tutorial Image -->
         <li class="list-group-item">
-          <img class="img-responsive" src="{% static "registration\images\share_permission.jpg" %}" width="100%" height="auto" alt="Share Permission looks like this..">
+          <img class="img-responsive" src="{% static "registration/images/share_permission.jpg" %}" width="100%" height="auto" alt="Share Permission looks like this..">
           <!-- Image Model   -->
           <div id="imageModel" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
             <div class="modal-dialog modal-xl">
               <div class="modal-content">
                 <div class="modal-body">
-                  <img src="{% static "registration\images\share_permission.jpg" %}" width="100%" height="auto" alt="Share Permission looks like this.." >
+                  <img src="{% static "registration/images/share_permission.jpg" %}" width="100%" height="auto" alt="Share Permission looks like this.." >
                 </div>
               </div>
             </div>
@@ -161,7 +161,7 @@
       <!-- <form id="fileUploadForm" method="post" enctype="multipart/form-data"> -->
       <div class="form-group upload_type_select dropzone__box Upload" style="display: none;">
 
-        <img class="box__icon" src="{% static "\registration\images\upload-file.svg" %}" alt="Upload Icon">
+        <img class="box__icon" src="{% static "/registration/images/upload-file.svg" %}" alt="Upload Icon">
         {{ form.upload | add_class:"box__file" | attr:"data-multiple-caption:{count} files selected" | attr:"multiple"}}
         <label for="id_upload"><strong>Choose a file</strong><span class="box__dragndrop"> or drag it here</span>.</label>
         {{ form.upload.errors }}
