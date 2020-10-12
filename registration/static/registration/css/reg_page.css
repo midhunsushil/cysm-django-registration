@@ -35,3 +35,50 @@
 .upload-info h2 {
   color: #9900cc;
 }
+
+/* School registration page */
+button.btn-clone svg {
+  width: 20px;
+  height: auto;
+  display: none;
+}
+
+button.btn-clone:hover svg {
+  width: 22px;
+  transform: rotate(180deg);
+  transition: all 0.1s linear;
+  transition: transform 0.7s ease-out;
+}
+
+button.btn-clone {
+  background: none;
+  outline: none;
+  padding: 0px;
+  /* border: 1px solid red; */
+  border: none;
+  margin-top: 8px;
+}
+
+.add-form-btn .plus svg {
+  color: #80cd32;
+  display: block;
+}
+
+.add-form-btn:hover .plus svg {
+  color: #66cd32;
+  width: 22px;
+}
+
+.remove-form-btn .minus svg {
+  color: #ff4d2e;
+  display: block;
+}
+
+.remove-form-btn:hover .minus svg {
+  color: #F32013;
+}
+
+.input-group-prepend .input-group-text {
+  padding: 5px 6px 1px 6px;
+  font-size: 20px;
+}

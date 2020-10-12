@@ -39,6 +39,29 @@
       // $(".upload_type_select"+targetBox+" input").prop("required",true);
       $(".upload_type_select" + targetBox).show();
     });
+
+    // School_code value update
+    $("#id_school").change(function () {
+      var url = "";  // get the url of the `teacher_reg` view
+      var schoolId = $(this).val();  // get the selected school ID from the dropdown
+
+      if(schoolId) {
+        $.ajax({                       // initialize an AJAX request
+          url: url,                    // set the url of the request (= self)
+          data: {
+            'school_id': schoolId       // add the school id to the GET parameters
+          },
+          success: function (data) {   // `data` is the return of the `teacher_reg` view function
+            $("#id_school_code").val(data);  // replace the value of the school_code input with the data that came from the server
+          }
+        });
+      }
+      else {
+        $("#id_school_code").val("Select a school");
+      }
+
+    });
+
   });
 </script>
 {% endblock script-content %}
@@ -49,7 +72,7 @@
 
 {% block body-content %}
 <!-- FORM STARTING -->
-<form class="dropzone" method="post" enctype="multipart/form-data">
+<form class="dropzone" method="post" enctype="multipart/form-data" >
 
   {% csrf_token %}
 
@@ -68,7 +91,7 @@
 
     </div>
   </div>
-
+<!-- Upload Instruction -->
   <div class="container my-2 upload-info">
     <div class="jumbotron">
       <h2>Student Record Upload Instructions</h2>
@@ -131,7 +154,7 @@
       </ul>
     </div>
   </div>
-
+<!-- Upload Instruction END -->
   <div class="container my-2">
     <div class="jumbotron">
       <!-- Upload Type -->
