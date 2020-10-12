@@ -10,30 +10,61 @@
 <link rel="stylesheet" href="{% static "registration\css\reg_page.css" %}">
 {% endblock css %}
 
+<!-- JavaScript -->
+{% block js %}
+<script type="text/javascript" src="{% static "registration\js\school_reg_page.js" %}"></script>
+{% endblock js %}
+
 {% block style1 %}
 <style media="screen">
   .head.jumbotron {
     background-color: rgba(177, 233, 255, 0.7);
   }
 
-  .add-form-btn svg {
-    color: #80cd32;
+  button.btn-clone svg {
     width: 20px;
     height: auto;
+    display: none;
   }
 
-  .add-form-btn:hover svg {
-    color: #66cd32;
+  button.btn-clone:hover svg {
     width: 22px;
+    transform: rotate(180deg);
+    transition: all 0.1s linear;
+    transition: transform 0.7s ease-out;
   }
 
-  button.add-form-btn {
+  button.btn-clone {
     background: none;
     outline: none;
     padding: 0px;
     /* border: 1px solid red; */
     border: none;
-    margin-top: 7px;
+    margin-top: 8px;
+  }
+
+  .add-form-btn .plus svg {
+    color: #80cd32;
+    display: block;
+  }
+
+  .add-form-btn:hover .plus svg {
+    color: #66cd32;
+    width: 22px;
+  }
+
+  .remove-form-btn .minus svg {
+    color: #ff4d2e;
+    display: block;
+  }
+
+  .remove-form-btn:hover .minus svg {
+    color: #F32013;
+  }
+
+  .input-group-prepend .input-group-text {
+    padding: 5px 6px 1px 6px;
+    font-size: 20px;
   }
 </style>
 {% endblock style1 %}
@@ -60,7 +91,9 @@
 
       </div>
       {% endfor %}
-      {{ formset.management_form }}
+
+      <!-- Formset Management Form -->
+      <div class="formset-management">{{ formset.management_form }}</div>
 
       {% for form in formset %}
       <div class="form-row">
@@ -76,7 +109,7 @@
           <label class="sr-only" for="{{ form.teacher_email.id_for_label }}">Teacher Email</label>
           <div class="input-group mb-2">
             <div class="input-group-prepend">
-              <div class="input-group-text">@</div>
+              <div class="input-group-text">📧</div>
             </div>
             {{ form.teacher_email | add_class:"form-control" | attr:"placeholder:Teacher Email" }}
           </div>
@@ -86,8 +119,9 @@
           {{ form.contact_number | add_class:"form-control" | attr:"placeholder:Contact Number" }}
         </div>
         <div class="col-md-1">
-          <button class="add-form-btn" type="button" name="add">
-            {% include 'registration\plus-circle.svg' %}
+          <button class="btn-clone add-form-btn" type="button" name="add/remove">
+            <span class="plus">{% include 'registration\plus-circle.svg' %}</span>
+            <span class="minus">{% include 'registration\minus-circle.svg' %}</span>
           </button>
         </div>
       </div>

@@ -122,7 +122,7 @@ def mail(SchoolForm) :
 
     text = "Recieved User Submit ! This needs more work\n"
     values = "School Name: {0}\nPhone: {1}\nEnrolements to CS: {2}".format(SchoolForm.cleaned_data['school_name'], SchoolForm.cleaned_data['contact_number'], SchoolForm.cleaned_data['enrolements_to_CS'])
-    send_mail('User Submit', text+values, 'iAmRoony@cysm-dev.xyz', ['wewovo6066@deselling.com', 'midhunpandaraparambilsushil.cs18@bitsathy.ac.in'])
+    send_mail('User Submit', text+values, 'iAmRoony@cysm-dev.xyz', ['wewovo6066@deselling.com', 'midhunpandaraparambilsushil.cs18@bitsathy.ac.in', 'prahladkakkattu@gmail.com'])
     print("Mail sent")
 
 def test(request) :

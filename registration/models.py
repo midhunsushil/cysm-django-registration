@@ -53,7 +53,7 @@ class Class_Section(models.Model) :
     def __str__(self) :
         # Displays Object in the form "<class_>-<section>"
         school_name = str(self.school)
-        return "{0}-{1}@{2}".format(self._class, self.section, school_name)
+        return "{0}-{1}@{2}".format(self.class_no, self.section, school_name)
 
 class Teacher_Info(models.Model) :
 
