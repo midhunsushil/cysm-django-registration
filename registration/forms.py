@@ -27,7 +27,7 @@ class TeacherForm(forms.ModelForm) :
 
     class Meta:
         model = Teacher_Info
-        fields = ["school", "full_name", "contact_number", "upload_type", "url", "upload"]
+        fields = ["school", "full_name", "email", "contact_number", "upload_type", "url", "upload"]
 
 class EnquiryForm(forms.ModelForm) :
 

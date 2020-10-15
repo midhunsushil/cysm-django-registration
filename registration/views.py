@@ -120,7 +120,7 @@ def teacher_reg(request) :
 
     dict = {
         'form' : form,
-        'form_teacher_details' : [form['school'], form['school_code'], form['full_name'], form['contact_number']],
+        'form_teacher_details' : [form['school'], form['school_code'], form['full_name'], form['email'], form['contact_number']],
     }
     return render(request, "registration/teacher_registration_page.html", context = dict )
 

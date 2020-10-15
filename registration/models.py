@@ -38,6 +38,7 @@ class School_Info(models.Model) :
     contact_number = models.CharField(max_length = 12, unique = True, validators = [number_check])
     enrolements_to_CS = models.PositiveIntegerField()
     no_of_teachers = models.PositiveIntegerField()
+    verified = models.BooleanField(default = False)
 
     def __str__(self):
         return self.school_name
@@ -65,11 +66,14 @@ class Teacher_Info(models.Model) :
     # Teacher Info
     school = models.ForeignKey(School_Info, on_delete=models.CASCADE)
     full_name = models.CharField(max_length = 100)
+    email = models.EmailField(max_length = 50)
     contact_number = models.CharField(max_length = 12, validators = [number_check])
     # Student Records with Teacher
     upload_type = models.CharField(max_length = 10, choices = RecordType.choices, default = RecordType.Url)
     url = models.URLField(blank = True)
     upload = models.FileField(upload_to = user_directory_path, null = True, blank=True)
+
+    verified = models.BooleanField(default = False)
 
     def __str__(self):
         # Displays Object in the form "<full_name> (<teacher_id>)"
