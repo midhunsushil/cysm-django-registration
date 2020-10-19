@@ -8,7 +8,7 @@ class SchoolForm(forms.ModelForm) :
 
     class Meta() :
         model = School_Info
-        fields = ["school_name", "school_code", "contact_number", "enrolements_to_CS", "no_of_teachers", ]
+        fields = ["school_name", "school_code", "contact_number", "enrolments_to_CS", "no_of_teachers", ]
 
 class ClassSectionForm(forms.ModelForm) :
 

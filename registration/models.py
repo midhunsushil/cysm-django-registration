@@ -36,7 +36,7 @@ class School_Info(models.Model) :
     # state = models.CharField(max_length = 20)
     # principal_name = models.CharField(max_length = 100)
     contact_number = models.CharField(max_length = 12, unique = True, validators = [number_check])
-    enrolements_to_CS = models.PositiveIntegerField()
+    enrolments_to_CS = models.PositiveIntegerField()
     no_of_teachers = models.PositiveIntegerField()
     verified = models.BooleanField(default = False)
 
