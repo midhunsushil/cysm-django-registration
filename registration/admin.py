@@ -6,7 +6,7 @@ from django.utils.translation import gettext_lazy as _
 class EnrolmentListFilter(admin.SimpleListFilter):
     # Human-readable title which will be displayed in the
     # right admin sidebar just above the filter options.
-    title = _('Enrolments')
+    title = _('enrolments')
 
     # Parameter for the filter that will be used in the URL query.
     parameter_name = 'enrolments_to_CS'
