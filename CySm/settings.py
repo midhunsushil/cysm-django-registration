@@ -50,6 +50,7 @@ INSTALLED_APPS = [
     'widget_tweaks',
     'my_first_app',
     'registration',
+    'chat_mon_game',
 ]
 
 MIDDLEWARE = [
