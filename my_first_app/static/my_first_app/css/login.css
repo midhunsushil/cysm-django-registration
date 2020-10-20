@@ -1,0 +1,280 @@
+body {
+  background: url('../images/bg-login.png') no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+
+.logo_Container {
+  width: 240px;
+  height: 70px;
+  border-radius: 24px 24px 0 0;
+  background-color: #ffffff;
+  margin-top: 120px;
+  margin-bottom: -1mm;
+  margin-right: auto;
+  margin-left: auto;
+  position: relative;
+}
+
+#logo {
+  width: 226.9px;
+  height: 50.9px;
+  margin: 12px 18px 20px 10px;
+  position: absolute;
+}
+
+.Tool-Tip-Container {
+  /* height: 341px; */
+  border-radius: 24px;
+  box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.06);
+  background-color: #ffffff;
+  /* margin-left: auto;
+  margin-right: auto; */
+}
+
+form .errorlist {
+  max-width: 90%;
+  font-family: 'Bubblegum Sans', cursive;
+  font-size: 12px;
+  line-height: normal;
+  letter-spacing: normal;
+  color: #e91e63;
+  padding: 0 0 0 45px;
+  list-style-type: "⋆";
+}
+
+form .errorlist li {
+  padding-left: 9px;
+}
+
+form .errorlist.nonfield {
+  margin-bottom: -20px;
+  font-size: 14px;
+  color: #f44336;
+}
+
+form .username .errorlist {
+  margin-top: -20px;
+}
+
+@media only screen and (max-width: 320px) {
+  body {
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    min-width: 320px;
+    width: 100%;
+  }
+}
+
+/*Phone and Tablet*/
+@media (min-width: 320px) and (max-width: 991px) {
+  .Tool-Tip-Container {
+    max-width: 440px;
+    width: 94%;
+    height: auto;
+  }
+
+  input {
+    width: 88%;
+  }
+
+  .Would-you-like-to-chat {
+    text-align: center;
+  }
+}
+
+/*Small Phones*/
+@media only screen and (max-width: 425px) {
+  #logo {
+    width: 200px;
+    height: 44.9px;
+    margin: 12px 18px 20px 6px;
+  }
+
+  .logo_Container {
+    width: 210px;
+    height: 61.3px;
+  }
+
+  .Tool-Tip-Container {
+    width: 100%;
+    height: auto;
+  }
+
+  input {
+    width: 90%;
+  }
+}
+
+/*Laptop and Higher*/
+@media only screen and (min-width: 992px) {
+  .logo_Container {
+    width: 314px;
+    height: 88px;
+  }
+
+  #logo {
+    margin: 18px 43.5px 19px 43.5px;
+  }
+
+  .Tool-Tip-Container {
+    width: 873px;
+    height: 341px;
+  }
+
+  .Login-to-your-Account {
+    margin-top: 41px;
+    margin-left: 122px;
+    margin-right: 120px;
+  }
+
+  #id_username {
+    margin: 24px auto auto 33px;
+    left: 33px;
+  }
+
+  #id_password {
+    margin: 24px auto auto 33px;
+  }
+
+  #button {
+    margin: 40px auto auto 135px;
+  }
+
+  input {
+    width: 371px;
+  }
+
+  .Would-you-like-to-chat {
+    width: 381px;
+    height: 154px;
+    margin-left: -57px;
+    margin-top: 76px;
+  }
+}
+
+.Tool-Tip-Container .row div {
+  height: auto;
+}
+
+.Login-to-your-Account {
+  width: 197px;
+  height: 27px;
+  font-family: 'Bubblegum Sans', cursive;
+  font-size: 24px;
+  font-weight: normal;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: normal;
+  letter-spacing: normal;
+  color: #430094;
+  margin-top: 41px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+#line-col p {
+  margin-left: -200px;
+}
+
+#id_username {
+  margin: 24px auto;
+  display: flex;
+}
+
+#id_password {
+  margin: 24px auto;
+  display: block;
+}
+
+input {
+  max-width: 371px;
+  height: 40px;
+  border: 1.2px solid #b0b3b4;
+  font-family: 'Bubblegum Sans', cursive;
+  font-size: 16px;
+  font-weight: normal;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.13;
+  letter-spacing: normal;
+  border-radius: 5px;
+  padding: 13px 13px 13px 13px;
+}
+
+::placeholder {
+  width: 300px;
+  height: 18px;
+  font-family: 'Bubblegum Sans', cursive;
+  font-size: 16px;
+  font-weight: normal;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.13;
+  letter-spacing: normal;
+  color: #b0b3b4;
+}
+
+#button {
+  width: 170px;
+  height: 35px;
+  border: none;
+  outline: none;
+  border-radius: 16px;
+  background-color: #5b2fa2;
+  margin: 40px auto;
+  box-shadow: 1px 4.5px #3a1b6d;
+  font-family: 'Bubblegum Sans', cursive;
+  font-size: 16px;
+  font-weight: normal;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: normal;
+  letter-spacing: normal;
+  color: #ffffff;
+  text-align: center;
+  display: block;
+}
+
+#button:hover {
+  background-color: #6f39c6
+}
+
+#button:active {
+  background-color: #6f39c6;
+  box-shadow: 0.5px 2.25px #371966;
+  transform: translate(1px, 1px);
+}
+
+#vline {
+  width: 1px;
+  height: 235px;
+  opacity: 0.5;
+  border-right: 1px solid #979797;
+  margin-top: 40px;
+}
+
+#hline {
+  height: 33px;
+  width: 85%;
+  opacity: 0.5;
+  border-top: 1px solid #979797;
+}
+
+.Would-you-like-to-chat {
+  height: auto;
+  font-family: 'Bubblegum Sans', cursive;
+  font-size: 16px;
+  font-weight: normal;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.38;
+  letter-spacing: normal;
+  color: #4a4a4a;
+}
+
+.Would-you-like-to-chat .only-for-kids {
+  color: #5b2fa2;
+}

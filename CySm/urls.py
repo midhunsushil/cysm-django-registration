@@ -15,14 +15,15 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
-from my_first_app import views
+from registration import views
 from django.conf import settings
 from django.conf.urls.static import static
 
 urlpatterns = [
 
-    path('', views.login, ),
-    path('my_first_app/', include('my_first_app.urls')),
+    path('', include('registration.urls')),
+    path('login/', include('my_first_app.urls')),
     path('register/', include('registration.urls')),
+    path('test/', include('chat_mon_game.urls')),
     path('admin/', admin.site.urls),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT) #Comment out after after changing to production mode

@@ -95,6 +95,12 @@ def teacher_reg(request) :
 
     form = TeacherForm()
 
+    if request.GET.get('school_id'):
+
+        school_id = request.GET.get('school_id')
+        school_code = School_Info.objects.get(pk = school_id).school_code
+        return HttpResponse(school_code)
+
     if request.method == "POST" :
 
         print("Post Request Recieved !")
@@ -114,7 +120,7 @@ def teacher_reg(request) :
 
     dict = {
         'form' : form,
-        'form_teacher_details' : [form['school'], form['full_name'], form['teacher_id'], form['phone_no']],
+        'form_teacher_details' : [form['school'], form['school_code'], form['full_name'], form['email'], form['contact_number']],
     }
     return render(request, "registration/teacher_registration_page.html", context = dict )
 

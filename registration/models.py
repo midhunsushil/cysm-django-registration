@@ -24,7 +24,7 @@ def user_directory_path(instance, filename):
     FILE,EXT = os.path.splitext(filename)
     BASE_DIR = "registration/student_record"
     # File will be uploaded to MEDIA_ROOT/registration/student_record/instance/<filename>-<currentDateTime><extension>
-    return '{0}/{1}/{2}-{3}{4}'.format(BASE_DIR, instance, FILE, currentDateTime, EXT)
+    return '{0}/{1}/{2}-{3}{4}'.format(BASE_DIR, instance.full_name, FILE, currentDateTime, EXT)
 
 # Create your models here.
 
@@ -36,8 +36,9 @@ class School_Info(models.Model) :
     # state = models.CharField(max_length = 20)
     # principal_name = models.CharField(max_length = 100)
     contact_number = models.CharField(max_length = 12, unique = True, validators = [number_check])
-    enrolements_to_CS = models.PositiveIntegerField()
+    enrolments_to_CS = models.PositiveIntegerField()
     no_of_teachers = models.PositiveIntegerField()
+    verified = models.BooleanField(default = False)
 
     def __str__(self):
         return self.school_name
@@ -65,16 +66,18 @@ class Teacher_Info(models.Model) :
     # Teacher Info
     school = models.ForeignKey(School_Info, on_delete=models.CASCADE)
     full_name = models.CharField(max_length = 100)
-    teacher_id = models.CharField(max_length = 20)
-    phone_no = models.CharField(max_length = 12, validators = [number_check])
+    email = models.EmailField(max_length = 50)
+    contact_number = models.CharField(max_length = 12, validators = [number_check])
     # Student Records with Teacher
     upload_type = models.CharField(max_length = 10, choices = RecordType.choices, default = RecordType.Url)
     url = models.URLField(blank = True)
     upload = models.FileField(upload_to = user_directory_path, null = True, blank=True)
 
+    verified = models.BooleanField(default = False)
+
     def __str__(self):
         # Displays Object in the form "<full_name> (<teacher_id>)"
-        return "{0} ({1})".format(self.full_name, self.teacher_id)
+        return "{0}@{1}".format(self.full_name, str(self.school))
 
 class Enquiry_Data(models.Model) :
 

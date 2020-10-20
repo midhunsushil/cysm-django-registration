@@ -1,0 +1,68 @@
+.dropzone .dropzone__box .box__dragndrop,
+.dropzone .dropzone__box .box__uploading,
+.dropzone .dropzone__box .box__success,
+.dropzone .dropzone__box .box__error {
+  display: none;
+}
+
+.dropzone .dropzone__box .box__file {
+  /* display: none; */
+  width: 100%;
+  height: 100%;
+  border: 1px solid red;
+  position: absolute;
+  opacity: 0;
+  top: 0;
+  left: 0;
+  z-index: 2;
+
+}
+
+.dropzone .dropzone__box .box__icon {
+
+  height: 60px;
+  width: 100%;
+  margin: 10px;
+
+}
+
+.dropzone.has-advanced-upload .dropzone__box{
+
+  height: 200px;
+  width: auto;
+  /* background-color: #a5e9ff; */
+  background-color: #fff9e7;
+  outline: 2.3px dashed #0080FF;
+  outline-offset: -10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  cursor: pointer;
+  padding: 20px;
+  position: relative;
+}
+
+.dropzone.has-advanced-upload .dropzone__box.file__dropped {
+  background-color: #b6e1f6
+  /* background-color: #c7e4a8; */
+}
+
+.dropzone.has-advanced-upload .dropzone__box label {
+
+  font-family: "Trebuchet MS";
+  font-size: 1.2em;
+  display: block;
+
+}
+
+.dropzone.has-advanced-upload .dropzone__box.is-dragover {
+  /* background-color: #e8a5ff */
+  background-color: #c7e4a8;
+  transition: all 0.2s ease-in ;
+}
+
+.dropzone.has-advanced-upload .dropzone__box .box__dragndrop {
+  display: inline;
+}
