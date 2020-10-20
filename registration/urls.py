@@ -22,5 +22,4 @@ urlpatterns = [
     path('teacher', views.teacher_reg, name = "teacher-reg"),
     path('enquiry', views.enquiry_form, name = "enquiry"),
     path('thankyou/', views.thankyou_enquiry, name = "thankyou_enquiry"),
-    path('test', views.test, name = "test"),
 ]
