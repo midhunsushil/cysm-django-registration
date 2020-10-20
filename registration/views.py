@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect
 from registration.forms import *
 from django.http import HttpResponse, JsonResponse
 from django.core.mail import send_mail
+from django.utils.crypto import get_random_string
 
 # Create your views here.
 
@@ -33,7 +34,10 @@ def enquiry_form(request):
         if form.is_valid() :
 
             print("Form Data Valid")
-            form.save()
+            enquiry_obj = form.save(commit = False)
+            token = get_random_string(20)
+            enquiry_obj.token = token
+            enquiry_obj.save()
             # mail(form)
             return redirect('thankyou/')
             # Reset Form

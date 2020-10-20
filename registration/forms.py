@@ -37,4 +37,4 @@ class EnquiryForm(forms.ModelForm) :
 
     class Meta():
         model = Enquiry_Data
-        fields = ["name", "i_am", "contact_number", "email", "school_name", "school_city", "awareness"]
+        fields = ["name", "i_am", "contact_number", "email", "school_name", "school_city", "awareness",]
