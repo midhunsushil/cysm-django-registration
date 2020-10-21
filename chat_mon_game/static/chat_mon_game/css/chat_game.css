@@ -1,0 +1,29 @@
+.chat-container {
+  position: absolute;
+  padding: 20px;
+  right: 0;
+  top: 15%;
+  /* width: 90%; */
+  height: 372px;
+  display: flex;
+  justify-content: end;
+  flex-direction: column;
+  overflow-y: auto;
+}
+
+.chat-container .bubble {
+  background: #79C7C5;
+  float: right;
+}
+
+.bubble {
+  /* position: relative; */
+  display: inline-block;
+  align-self: flex-end;
+  width: auto;
+  margin-bottom: 5px;
+  color: #F9FBFF;
+  font-size: 0.9em;
+  padding: 10px 10px 10px 12px;
+  border-radius: 20px;
+}

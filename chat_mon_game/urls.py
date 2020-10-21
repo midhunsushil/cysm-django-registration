@@ -19,4 +19,5 @@ from . import views
 urlpatterns = [
 
     path('', views.game),
+    path('getchat/', views.getChat),
 ]
