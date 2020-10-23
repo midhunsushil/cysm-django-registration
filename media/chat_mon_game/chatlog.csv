@@ -1,21 +1,21 @@
-Sl.No.,from,chat
-1,sindu,"Hi how are you, I am good"
-2,pavi,Me too just that its booring here
-3,pavi,What do you do for fun ?
-4,raj,Guys wana play cards
-5,Jay,Asking Men Why Do You Need A Women?
-6,Jay,Ask anything I will answer
-7,Jay,Heya... what is your favorite thing to do...
-8,Jay,I was talking to a girl i think she is from Bangladesh we were talking about spending quality time with family are u reading this pls reply i want to talk with you more
-9,Ina,"Hi, I'm lookin for a bf, I'm an 18 girl from south east asia. I hate somkers, and I just wanna some guy who older than me, but not tho older. Text me on fb: facebook.com/dafuumi"
-10,Tantri,Hi Rohit I'm tantri 19th girl from indonesian I'm sorry I pressed the phone keyboard incorrectly so I accidentally leave our chat. I hope next time u will see this messege. And i hope we can meet again I wnt to say i love u too so much u are
-11,Anurag Batham,Why is it called rush hour when nobody actually moves ??
-12,Orin Lusterdxo,just talk about anything
-13,Orin Lusterdxo,"How are we all doing, been off for a while but will chat with all of you <3 love you all XD"
-14,Alireza.iran,How do i talk about sth when there isnt anyone on the other side replying?
-15,Alireza.iran,Also i have so many subjects ti talk about if ur into that hit me up here
-16,Orin Lusterdxo,@Wayne-Fordham i dont share my snap on here.... sorry
-17,Orin Lusterdxo,@JamesBond007 what makes me angry did you say?
-18,PrettyAnnie,"Winner, Winner, Fidget Spinner!!!"
-19,PrettyAnnie,Which fidget spinners do you prefer??
-20,Piah,Sorry to say but i dont like spinner they gives me a headache
+Sl.No.,from,chat,moderation
+1,sindu,"Hi how are you, I am good",offensive
+2,pavi,Me too just that its booring here,moderate
+3,pavi,What do you do for fun ?,suspicious
+4,raj,Guys wana play cards,offensive
+5,Jay,Asking Men Why Do You Need A Women?,moderate
+6,Jay,Ask anything I will answer,suspicious
+7,Jay,Heya... what is your favorite thing to do...,offensive
+8,Jay,I was talking to a girl i think she is from Bangladesh we were talking about spending quality time with family are u reading this pls reply i want to talk with you more,moderate
+9,Ina,"Hi, I'm lookin for a bf, I'm an 18 girl from south east asia. I hate somkers, and I just wanna some guy who older than me, but not tho older. Text me on fb: facebook.com/dafuumi",suspicious
+10,Tantri,Hi Rohit I'm tantri 19th girl from indonesian I'm sorry I pressed the phone keyboard incorrectly so I accidentally leave our chat. I hope next time u will see this messege. And i hope we can meet again I wnt to say i love u too so much u are,offensive
+11,Anurag Batham,Why is it called rush hour when nobody actually moves ??,moderate
+12,Orin Lusterdxo,just talk about anything,suspicious
+13,Orin Lusterdxo,"How are we all doing, been off for a while but will chat with all of you <3 love you all XD",offensive
+14,Alireza.iran,How do i talk about sth when there isnt anyone on the other side replying?,moderate
+15,Alireza.iran,Also i have so many subjects ti talk about if ur into that hit me up here,suspicious
+16,Orin Lusterdxo,@Wayne-Fordham i dont share my snap on here.... sorry,offensive
+17,Orin Lusterdxo,@JamesBond007 what makes me angry did you say?,moderate
+18,PrettyAnnie,"Winner, Winner, Fidget Spinner!!!",suspicious
+19,PrettyAnnie,Which fidget spinners do you prefer??,offensive
+20,Piah,Sorry to say but i dont like spinner they gives me a headache,moderate
