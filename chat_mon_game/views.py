@@ -1,10 +1,9 @@
 from django.shortcuts import render
-from django.http import HttpResponse, HttpResponseForbidden
+from django.http import HttpResponse, HttpResponseForbidden, JsonResponse
 from django.conf import settings
 import random, os, csv
 
 #Variable
-global_count = 0
 
 #Other functions
 
@@ -12,17 +11,18 @@ global_count = 0
 
 def game(request) :
 
-    global global_count
-    global_count = 0
     template_name = "chat_mon_game/chat_game.html"
     return render(request, template_name, )
 
 def getChat(request) :
 
         if request.method == "POST":
-            global global_count
-            global_count = global_count + 1
-            return HttpResponse(getrandomChat())
+
+            chatData = getrandomChat()
+            if(chatData) :
+                return JsonResponse(chatData)
+            else :
+                return JsonResponse({'errorExist' : True})
 
         return HttpResponseForbidden()
 
@@ -57,4 +57,11 @@ def getrandomChat() :
 
     randChat = random.randint(0,no_of_rows-1)
     print("randchat:", randChat)
-    return rows[randChat][2]
+
+    chatData = {
+        'slno' : rows[randChat][0],
+        'from' : rows[randChat][1],
+        'chat' : rows[randChat][2],
+        'moderation' : rows[randChat][3],
+    }
+    return chatData

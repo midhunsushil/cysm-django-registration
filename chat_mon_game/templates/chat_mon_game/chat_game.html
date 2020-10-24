@@ -24,6 +24,7 @@
 
   <!-- FONT -->
   <link href="https://fonts.googleapis.com/css2?family=Bubblegum+Sans&display=swap" rel="stylesheet">
+  <link href="{% static "chat_mon_game\css\fonts.css" %}" rel="stylesheet">
 
   <!-- CSS -->
   <link rel="stylesheet" href="{% static "chat_mon_game\css\chat_game.css" %}">
@@ -86,9 +87,77 @@
   <div class="container my-2 chat">
     <div class="jumbotron chat">
       <div class="chat-container w-75">
-        <div class="bubble">Nah, it's cool.</div>
-        <div class="bubble current">Well you should get your Dad a cologne. Here smell it. Oh wait! ...</div>
+        <template id="chatBubble">
+          <div class="bubble"></div>
+        </template>
       </div>
+    </div>
+  </div>
+  <div class="container my-2">
+    <div class="jumbotron chat-info">
+      <!-- Chat deatils box TEMPLATE-->
+      <template id="chatInfo">
+        <div class="row container-row" id="newPost">
+          <div class="col">
+            <!-- Head -->
+            <div class="row justify-content-left head">
+              <div class="content-img">
+                <a href="#">
+                  <img src="{% static 'chat_mon_game/images/profile-image-1.jpg' %}" alt="" class="profileImg">
+                </a>
+              </div>
+              <div class="col content-info">
+                <p class="title">
+                  <span class="accountName">Hisaki</span> posted a new update
+                </p>
+                <p class="uploadTime">
+                  <span>5 hours ago</span>
+                  <img class="user-icon" src="{% static "chat_mon_game/images/user-icon-2.svg" %}" alt="user-icon">
+                </p>
+              </div>
+            </div>
+            <!-- Message -->
+            <div class="row">
+              <div class="col message">
+                Hi Rohit I'm tantri 19th girl from indonesian I'm sorry I pressed the phone keyboard incorrectly so I accidentally leave our chat. I hope next time u will see this messege.
+                And i hope we can meet again I wnt to say i love u too so much u are
+              </div>
+            </div>
+            <!-- Line -->
+            <div class="row">
+              <div class="hline"></div>
+            </div>
+            <!-- Option Bar -->
+            <ul class="nav">
+              <li class="nav-item">
+                <a class="nav-link" href="#">
+                  <img src="{% static "chat_mon_game/images/like.svg" %}" alt="Like Button">
+                  Like
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#">
+                  <img src="{% static "chat_mon_game/images/comment.svg" %}" alt="Comment Button">
+                  Comment
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#">
+                  <img src="{% static "chat_mon_game/images/share.svg" %}" alt="Share Button">
+                  Share
+                </a>
+              </li>
+              <li class="nav-item ml-auto align-right">
+                <a class="nav-link" href="#">
+                  <img src="{% static 'chat_mon_game/images/report.svg' %}" alt="Report Button">
+                  Report
+                </a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </template>
+      <!-- Chat deatils box template END-->
     </div>
   </div>
 
