@@ -101,9 +101,9 @@ $(document).ready(function() {
     }
     $(this).addClass('selected')
     chatInfoTemplateClone(data.from, data.text);
-    // console.log("clone in main\n"+clone)
-    // clone.appendTo('.jumbotron.chat-info')
-    // $("#newPost .content-info .accountName").text(data.from)
-    // $("#newPost .message").text(data.text)
   });
+
+  if($('.chat-container')[0].scrollHeight - $('.chat-container')[0].scrollTop > 500 ) {
+    $('.chat-container')[0].scrollTop = $('.chat-container')[0].scrollHeight
+  }
 });

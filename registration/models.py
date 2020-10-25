@@ -1,6 +1,7 @@
 from django.db import models
 from django.core.exceptions import ValidationError
 from django.utils.translation import gettext_lazy as _
+from django.utils import timezone
 import datetime
 import os
 
@@ -38,6 +39,7 @@ class School_Info(models.Model) :
     contact_number = models.CharField(max_length = 12, unique = True, validators = [number_check])
     enrolments_to_CS = models.PositiveIntegerField()
     no_of_teachers = models.PositiveIntegerField()
+    created_at = models.DateTimeField(default = timezone.now, editable = True, blank = True)
     verified = models.BooleanField(default = False)
 
     def __str__(self):
@@ -50,6 +52,7 @@ class Class_Section(models.Model) :
     section = models.CharField(max_length = 3)
     teacher_email = models.EmailField(max_length = 50)
     contact_number = models.CharField(max_length = 12, validators = [number_check])
+    created_at = models.DateTimeField(default = timezone.now, editable = True, blank = True)
 
     def __str__(self) :
         # Displays Object in the form "<class_>-<section>"
@@ -74,6 +77,7 @@ class Teacher_Info(models.Model) :
     upload = models.FileField(upload_to = user_directory_path, null = True, blank=True)
 
     verified = models.BooleanField(default = False)
+    created_at = models.DateTimeField(default = timezone.now, editable = True, blank = True)
 
     def __str__(self):
         # Displays Object in the form "<full_name> (<teacher_id>)"
@@ -96,6 +100,7 @@ class Enquiry_Data(models.Model) :
     school_city = models.CharField(verbose_name = "School City*", max_length = 20)
     awareness = models.CharField(verbose_name = "Where did you hear about us ?", max_length = 100, blank = True)
     token = models.CharField(max_length = 20, unique = True)
+    created_at = models.DateTimeField(default = timezone.now, editable = True, blank = True)
 
     def __str__(self):
         # Displays Object in the form "<IAmChoice>@<school_name>"
