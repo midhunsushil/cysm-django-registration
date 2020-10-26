@@ -32,14 +32,14 @@ $(document).ready(function() {
 
   }
 
-  function chatBubbleTemplate(text) {
+  function chatBubbleTemplate(text, classes) {
 
     var templateContent = document.querySelector('template#chatBubble').content;
     $(templateContent).find(".bubble").text(text);
-    $(templateContent).find(".bubble").addClass("current");
 
     var targetContainer = document.querySelector('div.chat-container');
     targetContainer.appendChild(document.importNode(templateContent, true));
+    $(targetContainer).find(".bubble:last-child").addClass(classes);
 
   }
 
@@ -54,8 +54,14 @@ $(document).ready(function() {
         if (!data.errorExist) {
 
           console.log(data);
-          //todo
-          chatBubbleTemplate(data.chat);
+
+          if($.inArray(data.slno, selectedChats) == -1) {
+            chatBubbleTemplate(data.chat, "current");
+          }
+          else {
+            chatBubbleTemplate(data.chat, "current selected");
+          }
+
           $('<input>').attr({
             type: 'hidden',
             name: 'info',
@@ -89,16 +95,20 @@ $(document).ready(function() {
     console.log("Pressed");
   });
 
-  $(".chat-container").on("click", ".bubble", function() {
+  $(".chat-container").on("click", ".bubble:not(.selected)", function() {
     console.log('Clicked Chat!')
+
     $inputInfo = $(this).children("input[name = 'info']")
     console.log($inputInfo)
+
     data = {
       slno: $inputInfo.attr('chat_data_slno'),
       from: $inputInfo.attr('chat_data_from'),
       text: $inputInfo.attr('chat_data_text'),
       mod: $inputInfo.attr('chat_data_mod')
     }
+
+    selectedChats.push(data.slno)
     $(this).addClass('selected')
     chatInfoTemplateClone(data.from, data.text);
   });

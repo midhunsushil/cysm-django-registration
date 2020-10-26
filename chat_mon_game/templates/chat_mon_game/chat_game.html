@@ -131,26 +131,27 @@
             <ul class="nav">
               <li class="nav-item">
                 <a class="nav-link" href="#">
-                  <img src="{% static "chat_mon_game/images/like.svg" %}" alt="Like Button">
-                  Like
+                  <img src="{% static "chat_mon_game/images/angry-words.svg" %}" alt="Offensive Icon">
+                  Offensive
                 </a>
               </li>
               <li class="nav-item">
                 <a class="nav-link" href="#">
-                  <img src="{% static "chat_mon_game/images/comment.svg" %}" alt="Comment Button">
-                  Comment
+                  <img src="{% static "chat_mon_game/images/suspicious.svg" %}" alt="Suspicious Icon">
+                  Suspicious
                 </a>
               </li>
               <li class="nav-item">
                 <a class="nav-link" href="#">
-                  <img src="{% static "chat_mon_game/images/share.svg" %}" alt="Share Button">
-                  Share
+                  <img src="{% static "chat_mon_game/images/moderate.png" %}" alt="Moderate Icon">
+                  Moderate
                 </a>
               </li>
               <li class="nav-item ml-auto align-right">
-                <a class="nav-link" href="#">
-                  <img src="{% static 'chat_mon_game/images/report.svg' %}" alt="Report Button">
-                  Report
+                <a class="nav-link close-btn" href="#">
+                  <!-- <img src="{% static 'chat_mon_game/images/report.svg' %}" alt="Report Button"> -->
+                  <span class="close-icon">{% include "chat_mon_game/close-circle.svg" %}</span>
+                  Close
                 </a>
               </li>
             </ul>

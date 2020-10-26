@@ -31,6 +31,7 @@
   font-size: 0.9em;
   padding: 10px 10px 10px 12px;
   border-radius: 20px;
+  cursor: pointer;
 }
 
 /* Scroll Bar */
@@ -66,8 +67,8 @@
       color-stop(0.72, rgb(73, 125, 189)),
       color-stop(0.86, rgb(28, 58, 148)));
 }
-
 /* Scroll Bar END*/
+
 /* Post New Update Block */
 #newPost .head .profileImg {
   width: 48px;
@@ -175,12 +176,27 @@
   display: block;
 }
 
-#newPost ul.nav li a img {
+#newPost ul.nav li a img, #newPost ul.nav li a svg {
   display: inline-block;
   height: 100%;
   width: auto;
   margin-right: 5px;
   margin-top: -5px;
+}
+
+#newPost ul.nav li a.close-btn:hover {
+  color: #ff4d2e;
+}
+
+#newPost ul.nav li a:hover {
+  color: #507DBC;
+  /* color: #007bff; */
+}
+
+#newPost ul.nav li a.close-btn .close-icon svg {
+  /* color: #888C9E; */
+  margin-right: 2px;
+  margin-top: -4px;
 }
 
 #newPost ul.nav li.align-right a {
