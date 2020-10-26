@@ -63,9 +63,9 @@
     /* background-image: url("{% static '/chat_mon_game/images/bg_img_2.png' %}"); */
 
     /* Center and scale the image nicely */
-    background-position: top;
+    background-position: bottom;
     background-repeat: no-repeat;
-    background-size: auto;
+    background-size: cover;
   }
 
   .navbar-light .navbar-nav .nav-link {
@@ -97,7 +97,7 @@
     <div class="jumbotron chat-info">
       <!-- Chat deatils box TEMPLATE-->
       <template id="chatInfo">
-        <div class="row container-row" id="newPost">
+        <div class="row container-row newPost">
           <div class="col">
             <!-- Head -->
             <div class="row justify-content-left head">
@@ -148,7 +148,7 @@
                 </a>
               </li>
               <li class="nav-item ml-auto align-right">
-                <a class="nav-link close-btn" href="#">
+                <a class="nav-link close-btn">
                   <!-- <img src="{% static 'chat_mon_game/images/report.svg' %}" alt="Report Button"> -->
                   <span class="close-icon">{% include "chat_mon_game/close-circle.svg" %}</span>
                   Close

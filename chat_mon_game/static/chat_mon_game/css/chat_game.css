@@ -69,8 +69,14 @@
 }
 /* Scroll Bar END*/
 
+.container .jumbotron.chat-info {
+  max-height: 320px;
+  padding-top: 40px;
+  overflow: auto;
+}
+
 /* Post New Update Block */
-#newPost .head .profileImg {
+.newPost .head .profileImg {
   width: 48px;
   height: 48px;
   border-radius: 24px;
@@ -79,15 +85,15 @@
   display: block;
 }
 
-#newPost .head .content-img {
+.newPost .head .content-img {
   height: 100%;
 }
 
-#newPost .head .content-info {
+.newPost .head .content-info {
   padding: 0px;
 }
 
-#newPost .head .content-info .title {
+.newPost .head .content-info .title {
   width: 100%;
   height: 19px;
   font-family: BubblegumSans;
@@ -102,11 +108,11 @@
   margin-bottom: 3px;
 }
 
-#newPost .head .content-info .title span {
+.newPost .head .content-info .title span {
   color: #457c9d;
 }
 
-#newPost .head .uploadTime {
+.newPost .head .uploadTime {
   width: auto;
   height: 16px;
   font-family: BubblegumSans;
@@ -119,7 +125,7 @@
   color: #6d7278;
 }
 
-#newPost {
+.newPost {
   overflow: auto;
   margin: 16px 1px 0px 1px;
   border-radius: 10px;
@@ -127,11 +133,11 @@
   background-color: #ffffff;
 }
 
-#newPost .head {
+.newPost .head {
   height: 84px;
 }
 
-#newPost .head .user-icon {
+.newPost .head .user-icon {
   width: 15px;
   height: 10px;
   object-fit: contain;
@@ -139,7 +145,7 @@
   margin-left: 8px;
 }
 
-#newPost .row .col.message {
+.newPost .row .col.message {
   font-family: BubblegumSans;
   font-size: 16px;
   line-height: 1.44;
@@ -148,7 +154,7 @@
   margin-bottom: 12px;
 }
 
-#newPost .row .hline {
+.newPost .row .hline {
   width: 100%;
   margin: 0px 18px;
   margin-bottom: 19px;
@@ -157,13 +163,13 @@
   opacity: 0.6;
 }
 
-#newPost ul.nav {
+.newPost ul.nav {
   height: auto;
   padding: 0px 5px;
   margin-bottom: 19px;
 }
 
-#newPost ul.nav li a {
+.newPost ul.nav li a {
   width: auto;
   height: 19px;
   font-family: BubblegumSans;
@@ -174,9 +180,10 @@
   padding: 0px;
   margin-right: 40px;
   display: block;
+  cursor: pointer;
 }
 
-#newPost ul.nav li a img, #newPost ul.nav li a svg {
+.newPost ul.nav li a img, .newPost ul.nav li a svg {
   display: inline-block;
   height: 100%;
   width: auto;
@@ -184,21 +191,21 @@
   margin-top: -5px;
 }
 
-#newPost ul.nav li a.close-btn:hover {
+.newPost ul.nav li a.close-btn:hover {
   color: #ff4d2e;
 }
 
-#newPost ul.nav li a:hover {
+.newPost ul.nav li a:hover {
   color: #507DBC;
   /* color: #007bff; */
 }
 
-#newPost ul.nav li a.close-btn .close-icon svg {
+.newPost ul.nav li a.close-btn .close-icon svg {
   /* color: #888C9E; */
   margin-right: 2px;
   margin-top: -4px;
 }
 
-#newPost ul.nav li.align-right a {
+.newPost ul.nav li.align-right a {
   margin: 0px;
 }
