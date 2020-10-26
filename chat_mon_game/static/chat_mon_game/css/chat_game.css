@@ -119,7 +119,7 @@
   color: #6d7278;
 }
 
-#newPost, #newImagePost {
+#newPost {
   overflow: auto;
   margin: 16px 1px 0px 1px;
   border-radius: 10px;
