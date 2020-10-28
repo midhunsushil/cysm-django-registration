@@ -16,20 +16,50 @@ $(document).ready(function() {
     }
     return cookieValue;
   }
-  const csrftoken = getCookie('csrftoken');
 
+  //Global Variables
+  const csrftoken = getCookie('csrftoken');
   var selectedChats = new Array()
+  var isScrolling = false
+
+  // Scroll Function
+  $('.scrollbar-macosx').scrollbar({
+    "autoUpdate": true
+  });
+
+  // Scroll-fix: Auto scroll disable on user scroll
+  $('.chat-container.scroll-content').scroll(function() {
+
+    console.log("Change detected")
+    var $chatContainer = $('.chat-container.scroll-content')[0]
+    var chat_scrollTop = $chatContainer.scrollTop
+    var chat_scrollHeight = $chatContainer.scrollHeight
+    var chat_clientHeight = $chatContainer.clientHeight
+    var dispacement = chat_scrollHeight - chat_scrollTop - chat_clientHeight
+
+    console.log("Scroll dist. from bottom: " + dispacement)
+
+    if (dispacement > chat_clientHeight) {
+      isScrolling = true;
+      console.log("is scrolling !!");
+    }
+
+    if (dispacement <= 1 && isScrolling) {
+      isScrolling = false;
+      console.log("not scrolling !!");
+    }
+  });
 
   function chatInfoTemplateClone(slno, from, text) {
 
     console.log("Cloning chatInfo template")
+
     var templateContent = document.querySelector('template#chatInfo').content;
     $(templateContent).find(".newPost .content-info .accountName").text(from);
     $(templateContent).find(".newPost .content-info").attr({
       "chat_data_slno": slno
-    })
+    });
     $(templateContent).find(".newPost .message").text(text);
-
 
     var targetContainer = document.querySelector('.jumbotron.chat-info');
     targetContainer.appendChild(document.importNode(templateContent, true));
@@ -41,23 +71,27 @@ $(document).ready(function() {
     var templateContent = document.querySelector('template#chatBubble').content;
     $(templateContent).find(".bubble").text(text);
 
-    var targetContainer = document.querySelector('div.chat-container');
+    var targetContainer = document.querySelector('div.chat-container.scroll-content');
     targetContainer.appendChild(document.importNode(templateContent, true));
     $(targetContainer).find(".bubble").removeClass("current");
     $(targetContainer).find(".bubble:last-child").addClass(classes);
 
   }
 
+  // ADD SELECTED CLASS on bubble-chat clicked
   function addSelected(slno) {
     console.log("Adding selected class");
+
     if ($.inArray(slno, selectedChats) == -1) {
       selectedChats.push(slno);
     }
+
     var input_info_slno = "input[name='info'][chat_data_slno='" + slno + "' ]";
     var $bubbleElement = $('.chat-container .bubble').find(input_info_slno);
     $bubbleElement.parent().addClass("selected");
   }
 
+  // REMOVE selected chats on close-btn clicked
   function removeSelected(slno) {
     console.log("Removing selected class");
     if ($.inArray(slno, selectedChats) == -1) {
@@ -74,6 +108,7 @@ $(document).ready(function() {
     return 1;
   }
 
+  // AJAX Request
   setInterval(function() {
     if (document.hasFocus()) {
       $.ajax({
@@ -82,6 +117,7 @@ $(document).ready(function() {
         },
         url: 'getchat/',
         type: 'POST',
+        //AJAX request on success function
         success: function(data) {
           if (!data.errorExist) {
 
@@ -102,7 +138,7 @@ $(document).ready(function() {
               'chat_data_mod': data.moderation
             }).appendTo('.chat-container .current');
 
-            var $chatContainer = $('.chat-container')[0]
+            var $chatContainer = $('.chat-container.scroll-content')[0]
             var chat_scrollTop = $chatContainer.scrollTop
             var chat_scrollHeight = $chatContainer.scrollHeight
             var chat_clientHeight = $chatContainer.clientHeight
@@ -110,10 +146,12 @@ $(document).ready(function() {
             console.log("scrollTop:" + chat_scrollTop)
             console.log("scrollHeight:" + chat_scrollHeight)
 
-            $(".chat-container").animate({
-              scrollTop: $(
-                '.chat-container').get(0).scrollHeight
-            }, 800);
+            if (!isScrolling) {
+              $(".chat-container.scroll-content").animate({
+                scrollTop: $chatContainer.scrollHeight -
+                  chat_clientHeight
+              }, 800);
+            }
 
           } else {
             console.log("No data");
@@ -145,7 +183,6 @@ $(document).ready(function() {
     addSelected(data.slno);
     chatInfoTemplateClone(data.slno, data.from, data.text);
   });
-  //Chat bubble clicked/selected END
 
   //Close Button clicked on chatInfo
   $("div").on("click", ".newPost .nav-item .close-btn", function() {
@@ -159,7 +196,4 @@ $(document).ready(function() {
     }
   });
 
-  if ($('.chat-container')[0].scrollHeight - $('.chat-container')[0].scrollTop > 500) {
-    $('.chat-container')[0].scrollTop = $('.chat-container')[0].scrollHeight
-  }
 });

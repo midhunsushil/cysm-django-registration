@@ -28,10 +28,12 @@
 
   <!-- CSS -->
   <link rel="stylesheet" href="{% static "chat_mon_game\css\chat_game.css" %}">
+  <link rel="stylesheet" href="{% static "chat_mon_game\css\jquery.scrollbar.css" %}">
   <!-- CSS END -->
 
   <!-- JavaScript -->
   <script src="{% static "chat_mon_game\js\chat_game.js" %}"></script>
+  <script src="{% static "chat_mon_game\js\jquery.scrollbar.js" %}"></script>
   <!-- <script src="{% static "registration\drop-zone\dropzone.js" %}"></script> -->
   <!-- JavaScript END-->
 
@@ -86,7 +88,7 @@
 
   <div class="container my-2 chat">
     <div class="jumbotron chat">
-      <div class="chat-container w-75">
+      <div class="chat-container scrollbar-macosx w-75">
         <template id="chatBubble">
           <div class="bubble"></div>
         </template>
@@ -163,11 +165,5 @@
   </div>
 
 </body>
-
-<script type="text/javascript">
-  $(document).ready(function() {
-
-  });
-</script>
 
 </html>
