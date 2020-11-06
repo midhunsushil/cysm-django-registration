@@ -19,8 +19,9 @@ $(document).ready(function() {
 
   //Global Variables
   const csrftoken = getCookie('csrftoken');
-  var selectedChats = new Array()
-  var isScrolling = false
+  var selectedChats = new Array();
+  var answers = {};
+  var isScrolling = false;
 
   // Scroll Function
   $('.scrollbar-macosx').scrollbar({
@@ -30,27 +31,28 @@ $(document).ready(function() {
   // Scroll-fix: Auto scroll disable on user scroll
   $('.chat-container.scroll-content').scroll(function() {
 
-    console.log("Change detected")
+    // console.log("Change detected")
     var $chatContainer = $('.chat-container.scroll-content')[0]
     var chat_scrollTop = $chatContainer.scrollTop
     var chat_scrollHeight = $chatContainer.scrollHeight
     var chat_clientHeight = $chatContainer.clientHeight
     var dispacement = chat_scrollHeight - chat_scrollTop - chat_clientHeight
 
-    console.log("Scroll dist. from bottom: " + dispacement)
-
-    if (dispacement > chat_clientHeight) {
+    // console.log("Scroll dist. from bottom: " + dispacement)
+    //Sets status as scrolling and pause auto scroll
+    if (dispacement > 200) {
       isScrolling = true;
-      console.log("is scrolling !!");
+      // console.log("is scrolling !!");
     }
-
+    //Sets status as NOT scrolling and resume auto scroll
     if (dispacement <= 1 && isScrolling) {
       isScrolling = false;
-      console.log("not scrolling !!");
+      // console.log("not scrolling !!");
     }
   });
 
-  function chatInfoTemplateClone(slno, from, text) {
+// ADD chatInfo block on chatBubble clicked
+  function chatInfoTemplateClone(slno, from, text, answered = null) {
 
     console.log("Cloning chatInfo template")
 
@@ -63,9 +65,14 @@ $(document).ready(function() {
 
     var targetContainer = document.querySelector('.jumbotron.chat-info');
     targetContainer.appendChild(document.importNode(templateContent, true));
-
+    if (answered) {
+      var $addedTemp = $(targetContainer).find(".newPost:last-child")
+      var targetBtn = ".nav-item .nav-link." + answered + "-btn"
+      $addedTemp.find(targetBtn).addClass("selected")
+    }
   }
 
+// ADD incoming chat in CHAT BUBBLE
   function chatBubbleTemplate(text, classes) {
 
     var templateContent = document.querySelector('template#chatBubble').content;
@@ -78,17 +85,25 @@ $(document).ready(function() {
 
   }
 
+  function addBubbleClass(slno, classList) {
+    var input_info_slno = "input[name='info'][chat_data_slno='" + slno + "' ]";
+    var $bubbleElement = $('.chat-container .bubble').find(input_info_slno);
+    $bubbleElement.parent().addClass(classList);
+  }
+
+  function removeBubbleClass(slno, classList) {
+    var input_info_slno = "input[name='info'][chat_data_slno='" + slno + "' ]";
+    var $bubbleElement = $('.chat-container .bubble').find(input_info_slno);
+    $bubbleElement.parent().removeClass(classList);
+  }
+
   // ADD SELECTED CLASS on bubble-chat clicked
   function addSelected(slno) {
     console.log("Adding selected class");
-
     if ($.inArray(slno, selectedChats) == -1) {
       selectedChats.push(slno);
     }
-
-    var input_info_slno = "input[name='info'][chat_data_slno='" + slno + "' ]";
-    var $bubbleElement = $('.chat-container .bubble').find(input_info_slno);
-    $bubbleElement.parent().addClass("selected");
+    addBubbleClass(slno, "selected")
   }
 
   // REMOVE selected chats on close-btn clicked
@@ -102,64 +117,21 @@ $(document).ready(function() {
         return value != slno;
       });
     }
-    var input_info_slno = "input[name='info'][chat_data_slno='" + slno + "' ]";
-    var $bubbleElement = $('.chat-container .bubble').find(input_info_slno);
-    $bubbleElement.parent().removeClass("selected");
+    removeBubbleClass(slno, "selected");
     return 1;
   }
 
-  // AJAX Request
-  setInterval(function() {
-    if (document.hasFocus()) {
-      $.ajax({
-        headers: {
-          'X-CSRFToken': csrftoken
-        },
-        url: 'getchat/',
-        type: 'POST',
-        //AJAX request on success function
-        success: function(data) {
-          if (!data.errorExist) {
+  // ADD ANSWER and update chatBubble class
+  function addAnswer(slno, answer) {
+    answers[slno] = answer
+    addBubbleClass(slno, "answered");
+  }
 
-            console.log(data);
-
-            if ($.inArray(data.slno, selectedChats) == -1) {
-              chatBubbleTemplate(data.chat, "current");
-            } else {
-              chatBubbleTemplate(data.chat, "current selected");
-            }
-
-            $('<input>').attr({
-              type: 'hidden',
-              name: 'info',
-              'chat_data_slno': data.slno,
-              'chat_data_from': data.from,
-              'chat_data_text': data.chat,
-              'chat_data_mod': data.moderation
-            }).appendTo('.chat-container .current');
-
-            var $chatContainer = $('.chat-container.scroll-content')[0]
-            var chat_scrollTop = $chatContainer.scrollTop
-            var chat_scrollHeight = $chatContainer.scrollHeight
-            var chat_clientHeight = $chatContainer.clientHeight
-
-            console.log("scrollTop:" + chat_scrollTop)
-            console.log("scrollHeight:" + chat_scrollHeight)
-
-            if (!isScrolling) {
-              $(".chat-container.scroll-content").animate({
-                scrollTop: $chatContainer.scrollHeight -
-                  chat_clientHeight
-              }, 800);
-            }
-
-          } else {
-            console.log("No data");
-          }
-        }
-      });
-    }
-  }, 3000);
+  //REMOVE ANSWER and update chatBubble class
+  function removeAnswer(slno, answer) {
+    delete answers[slno]
+    removeBubbleClass(slno, "answered");
+  }
 
   $(".chat-container::-webkit-scrollbar-thumb").on("mousedown", function() {
     console.log("Pressed");
@@ -181,7 +153,13 @@ $(document).ready(function() {
     }
 
     addSelected(data.slno);
-    chatInfoTemplateClone(data.slno, data.from, data.text);
+    //Selecting answered chat
+    if (answers[data.slno]) {
+      // console.log("Selecting answered chat")
+      chatInfoTemplateClone(data.slno, data.from, data.text, answers[data.slno]);
+    } else {
+      chatInfoTemplateClone(data.slno, data.from, data.text);
+    }
   });
 
   //Close Button clicked on chatInfo
@@ -189,11 +167,111 @@ $(document).ready(function() {
 
     $container = $(this).parents("div.newPost")
     slno = $container.find(".content-info").attr("chat_data_slno");
-    console.log("Close btn clicked #chatInfo slno = " + slno);
+    console.log("Close btn clicked #chatInfo; slno = " + slno);
     var removed = removeSelected(slno);
     if (removed) {
       $container.remove();
     }
   });
+
+  //Moderation option/answer click trigger function
+  function moderationBtnClicked(object, answer) {
+    $container = $(object).parents("div.newPost")
+    slno = $container.find(".content-info").attr("chat_data_slno");
+    if ($(object).is(".selected")) {
+      $(object).removeClass("selected")
+      removeAnswer(slno, answer);
+      console.log("Removed selection")
+    } else {
+      $container.find(".nav-item .btn").removeClass("selected")
+      $(object).addClass("selected")
+      addAnswer(slno, answer)
+      console.log("Added selection")
+    }
+    console.log("Updated ans")
+    console.log(JSON.stringify(answers))
+  }
+
+  //Moderation options clicked
+  $(document).on("click", ".newPost .nav-item .offensive-btn", function() {
+    moderationBtnClicked(this, "offensive");
+  });
+
+  $(document).on("click", ".newPost .nav-item .suspicious-btn", function() {
+    moderationBtnClicked(this, "suspicious")
+  });
+
+  $(document).on("click", ".newPost .nav-item .moderate-btn", function() {
+    moderationBtnClicked(this, "moderate")
+  });
+
+  $(document).on("click", ".testBtn", function() {
+
+    console.log("hasClass: " + $(this).is(".selected"))
+    if ($(this).is(".selected")) {
+      $(this).removeClass("selected")
+      console.log("removed selection")
+    } else {
+      $(".newPost .nav-item .btn").removeClass("selected")
+      $(this).addClass("selected")
+      console.log("selection added")
+    }
+  });
+
+  // AJAX Request
+  setInterval(function() {
+    if (document.hasFocus()) {
+      $.ajax({
+        headers: {
+          'X-CSRFToken': csrftoken
+        },
+        url: 'getchat/',
+        type: 'POST',
+        //AJAX request on success function
+        success: function(data) {
+          if (!data.errorExist) {
+
+            // console.log(data);
+            classToAdd = "current"
+            if ($.inArray(data.slno, selectedChats) != -1) {
+              classToAdd = classToAdd + " selected";
+            }
+            if (answers[data.slno]) {
+              classToAdd = classToAdd + " answered"
+            }
+            console.log(classToAdd)
+            chatBubbleTemplate(data.chat, classToAdd);
+
+            $('<input>').attr({
+              type: 'hidden',
+              name: 'info',
+              'chat_data_slno': data.slno,
+              'chat_data_from': data.from,
+              'chat_data_text': data.chat,
+              'chat_data_mod': data.moderation
+            }).appendTo('.chat-container .current');
+
+            var $chatContainer = $('.chat-container.scroll-content')[0]
+            var chat_scrollTop = $chatContainer.scrollTop
+            var chat_scrollHeight = $chatContainer.scrollHeight
+            var chat_clientHeight = $chatContainer.clientHeight
+
+            // console.log("scrollTop:" + chat_scrollTop)
+            // console.log("scrollHeight:" + chat_scrollHeight)
+
+            if (!isScrolling) {
+              $(".chat-container.scroll-content").animate({
+                scrollTop: $chatContainer.scrollHeight -
+                  chat_clientHeight
+              }, 800);
+            }
+
+          } else {
+            console.log("No data");
+          }
+        }
+      });
+    }
+  }, 3000);
 
 });

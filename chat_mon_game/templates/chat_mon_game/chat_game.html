@@ -97,6 +97,7 @@
   </div>
   <div class="container my-2">
     <div class="jumbotron chat-info">
+      <button class="testBtn" type="button" name="button">Test Click</button>
       <!-- Chat deatils box TEMPLATE-->
       <template id="chatInfo">
         <div class="row container-row newPost">
@@ -132,19 +133,19 @@
             <!-- Option Bar -->
             <ul class="nav">
               <li class="nav-item">
-                <a class="nav-link" href="#">
+                <a class="nav-link btn offensive-btn">
                   <img src="{% static "chat_mon_game/images/angry-words.svg" %}" alt="Offensive Icon">
                   Offensive
                 </a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="#">
+                <a class="nav-link btn suspicious-btn">
                   <img src="{% static "chat_mon_game/images/suspicious.svg" %}" alt="Suspicious Icon">
                   Suspicious
                 </a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="#">
+                <a class="btn nav-link moderate-btn">
                   <img src="{% static "chat_mon_game/images/moderate.png" %}" alt="Moderate Icon">
                   Moderate
                 </a>

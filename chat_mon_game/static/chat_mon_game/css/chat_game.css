@@ -21,6 +21,11 @@
   color: black;
 }
 
+.chat-container .bubble.answered {
+  background: #B5DB8B;
+  color: black;
+}
+
 .bubble {
   /* position: relative; */
   display: inline-block;
@@ -202,6 +207,11 @@
   /* color: #007bff; */
 }
 
+.newPost ul.nav li a.selected {
+  /* color: #507DBC; */
+  color: #007bff;
+}
+
 .newPost ul.nav li a.close-btn .close-icon svg {
   /* color: #888C9E; */
   margin-right: 2px;
@@ -210,4 +220,8 @@
 
 .newPost ul.nav li.align-right a {
   margin: 0px;
+}
+
+.testBtn.selected {
+  color: blue;
 }
