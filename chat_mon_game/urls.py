@@ -20,4 +20,5 @@ urlpatterns = [
 
     path('', views.game),
     path('getchat/', views.getChat),
+    path('submitTest/', views.submitTest),    
 ]

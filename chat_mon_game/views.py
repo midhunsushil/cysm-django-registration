@@ -26,7 +26,7 @@ def getChat(request) :
 
         return HttpResponseForbidden()
 
-def getrandomChat() :
+def getChats() :
 
     path = os.path.join(settings.BASE_DIR, "media", "chat_mon_game")
     # csv file name
@@ -55,13 +55,38 @@ def getrandomChat() :
         no_of_rows = csvreader.line_num-1
         print("Total no. of chats read:", no_of_rows)
 
+        return [rows, no_of_rows]
+
+def getrandomChat() :
+
+    chats, no_of_rows = getChats()
     randChat = random.randint(0,no_of_rows-1)
     print("randchat:", randChat)
 
     chatData = {
-        'slno' : rows[randChat][0],
-        'from' : rows[randChat][1],
-        'chat' : rows[randChat][2],
-        'moderation' : rows[randChat][3],
+        'slno' : chats[randChat][0],
+        'from' : chats[randChat][1],
+        'chat' : chats[randChat][2],
+        'moderation' : chats[randChat][3],
     }
     return chatData
+
+def submitTest(request):
+
+    if request.method == "POST" :
+
+        score = 0
+        print("Printing request")
+        data = request.POST
+        answers = data.dict()
+        chats, no_of_rows = getChats()
+        print(answers)
+        for key in answers :
+
+            intKey = int(key)
+            print(intKey)
+            correct_answer = chats[intKey-1][3]
+            answer = answers[key]
+            if(correct_answer == answer) :
+                score = score+1
+        return HttpResponse("Success! Score: "+str(score))

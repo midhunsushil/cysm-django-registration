@@ -274,4 +274,19 @@ $(document).ready(function() {
     }
   }, 3000);
 
+  $("#submit").click(function () {
+    $.ajax({
+      headers: {
+        'X-CSRFToken': csrftoken
+      },
+      url: 'submitTest/',
+      type: 'POST',
+      data: answers,
+      success: function (data) {
+        console.log("Sent request successfully");
+        console.log(data);
+      }
+    });
+  });
+
 });
