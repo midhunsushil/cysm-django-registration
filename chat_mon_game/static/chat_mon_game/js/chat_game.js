@@ -239,7 +239,7 @@ $(document).ready(function() {
             if (answers[data.slno]) {
               classToAdd = classToAdd + " answered"
             }
-            console.log(classToAdd)
+            // console.log(classToAdd)
             chatBubbleTemplate(data.chat, classToAdd);
 
             $('<input>').attr({
