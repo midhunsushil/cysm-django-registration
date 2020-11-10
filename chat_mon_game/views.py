@@ -75,7 +75,8 @@ def submitTest(request):
 
     if request.method == "POST" :
 
-        score = 0
+        score_plus = 0
+        score_minus = 0
         print("Printing request")
         data = request.POST
         answers = data.dict()
@@ -88,5 +89,19 @@ def submitTest(request):
             correct_answer = chats[intKey-1][3]
             answer = answers[key]
             if(correct_answer == answer) :
-                score = score+1
-        return HttpResponse("Success! Score: "+str(score))
+                score_plus = score_plus + 1
+            else :
+                score_minus = score_minus + 1
+        json_response = {
+            "status" : 1,
+            "message" : "Success",
+            "score_plus" : score_plus,
+            "score_minus" : score_minus,
+        }
+        return JsonResponse(json_response)
+
+def submitTestResponse(request, score_plus, score_minus):
+
+    template_name = "chat_mon_game/test_submitted.html"
+    context = { "score_plus" : score_plus, "score_minus" : score_minus }
+    return render(request, template_name, context)

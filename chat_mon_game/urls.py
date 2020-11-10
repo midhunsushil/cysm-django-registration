@@ -20,5 +20,6 @@ urlpatterns = [
 
     path('', views.game),
     path('getchat/', views.getChat),
-    path('submitTest/', views.submitTest),    
+    path('submitTest/', views.submitTest),
+    path('test_submitted/<int:score_plus>/<int:score_minus>', views.submitTestResponse)
 ]

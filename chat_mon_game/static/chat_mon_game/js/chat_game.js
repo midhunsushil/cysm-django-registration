@@ -283,8 +283,12 @@ $(document).ready(function() {
       type: 'POST',
       data: answers,
       success: function (data) {
-        console.log("Sent request successfully");
-        console.log(data);
+        if(data.status == 1) {
+          console.log("+score:"+data.score_plus)
+          console.log("-score:"+data.score_minus)
+          url = "test_submitted/" + data.score_plus + "/" + data.score_minus
+          window.location.replace(url);
+        }
       }
     });
   });

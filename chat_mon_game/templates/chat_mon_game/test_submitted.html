@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+{% load static %}
+
+<head>
+  <!-- META -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <!-- META END -->
+
+  <!-- FAVICON -->
+  <link rel="shortcut icon" href="{% static 'favicon.ico' %}" width=16px height=16px />
+
+  <!-- TITLE -->
+  {% block title %}<title>Thank you for your time</title>{% endblock title %}
+
+  <!-- Bootstrap CDN -->
+  <script src="https://code.jquery.com/jquery-3.5.1.min.js" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
+  <!-- Bootstrap CDN END -->
+
+  <!-- FONT -->
+  <link href="https://fonts.googleapis.com/css2?family=Bubblegum+Sans&display=swap" rel="stylesheet">
+  <link href="{% static "chat_mon_game\css\fonts.css" %}" rel="stylesheet">
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="{% static "chat_mon_game/css/chat_game.css" %}">
+  <!-- CSS END -->
+
+  <!-- JavaScript -->
+  <!-- <script src="{% static "chat_mon_game\js\chat_game.js" %}"></script> -->
+  <!-- JavaScript END-->
+
+  <!-- NAVBAR -->
+  <nav class="navbar navbar-expand-sm navbar-light bg-light">
+    <a class="navbar-brand p-0" href="{% url 'index' %}">
+      <img src="{% static "registration/images/logo2.png" %}" width="auto" height="42px" class="d-inline-block align-top mx-1 mr-2" alt="" loading="lazy">
+      <!-- <span class="d-inline-block" style="margin-top:6px;">CyberSmarties</span> -->
+    </a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+  </nav>
+  <!-- NAVBAR END -->
+</head>
+
+{% block css %}
+{% endblock css %}
+
+{% block js %}
+{% endblock js %}
+
+{% block style1 %}
+<style>
+  .bg {
+    background-color: #e3d3ee;
+    font-family: 'Bubblegum Sans', cursive;
+  }
+
+  .navbar-light .navbar-nav .nav-link {
+    font-size: 20px;
+  }
+
+  .jumbotron.chat {
+    height: 500px;
+    position: relative;
+  }
+
+  .jumbotron.thankyou {
+    background-color: rgba(125, 125, 125, 0.5);
+    /* max-width: 816px; */
+  }
+
+  .jumbotron.thankyou h1 {
+    color: rgba(255, 255, 255, 0.8);
+  }
+
+  .jumbotron.thankyou h5 {
+    color: #fff7ff;
+  }
+
+  .jumbotron.thankyou h5 span {
+    color: #107DD5;
+  }
+
+  .container.my-2.head {
+    display: none;
+  }
+
+  .container.thankyou {
+    background-image: url("{% static '/chat_mon_game/images/chat_anim.gif' %}");
+    background-position: right center;
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-color: white;
+    /* background-color: #e3d3ee; */
+    /* padding: 50px; */
+    border-radius: 7px;
+    display: flex;
+    justify-content: center;
+  }
+</style>
+{% endblock %}
+
+{% block script-content %}
+<!-- <script type="text/javascript">
+  $(document).ready(function() {
+    var delay = 7000;
+    console.log("starting timeout");
+    window.setTimeout(function() {
+      window.location = '/register';
+      console.log("expired");
+    }, delay);
+  })
+</script> -->
+{% endblock script-content %}
+
+{% block body-content %}
+
+<body class="bg">
+  <div class="container my-5 thankyou p-2 p-sm-4">
+    <div class="thankyou jumbotron mx-lg-5 mx-3">
+      <h1>Your score has been recorded.</h1>
+      <h5><span>Thank you</span> for taking the test! <br> You scored {{score_plus}} correctly and {{score_minus}} incorrectly.</h5>
+    </div>
+  </div>
+</body>
+
+{% endblock body-content %}
