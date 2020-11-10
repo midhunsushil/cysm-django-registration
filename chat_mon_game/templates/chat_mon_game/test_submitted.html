@@ -85,6 +85,14 @@
     color: #107DD5;
   }
 
+  .jumbotron.thankyou h5 span#score_plus {
+    color: #61B60C;
+  }
+
+  .jumbotron.thankyou h5 span#score_minus {
+    color:#ff4d2e;
+  }
+
   .container.my-2.head {
     display: none;
   }
@@ -107,7 +115,7 @@
 {% block script-content %}
 <script type="text/javascript">
   $(document).ready(function() {
-    var delay = 8000;
+    var delay = 12000;
     console.log("starting timeout");
     window.setTimeout(function() {
       window.location = '/register';
@@ -123,7 +131,7 @@
   <div class="container my-5 thankyou p-2 p-sm-4">
     <div class="thankyou jumbotron mx-lg-5 mx-3">
       <h1>Your score has been recorded.</h1>
-      <h5><span>Thank you</span> for taking the test! <br> You scored {{score_plus}} correctly and {{score_minus}} incorrectly.</h5>
+      <h5><span>Thank you</span> for taking the test! <br> You answered <span id="score_plus">{{score_plus}} correctly</span> and <span id="score_minus">{{score_minus}} incorrectly</span>.</h5>
     </div>
   </div>
 </body>
