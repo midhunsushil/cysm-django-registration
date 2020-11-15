@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+{% extends "chat_mon_game/base.html" %}
+{% load static %}
+{% load widget_tweaks %}
+
+<!-- CSS -->
+{% block css %}
+{% endblock css %}
+<!-- CSS END -->
+
+<!-- JavaScript -->
+{% block js %}
+{% endblock js %}
+<!-- JavaScript END-->
+
+{% block style1 %}
+<style>
+
+</style>
+{% endblock %}
+
+{% block body-content %}
+
+<div class="container my-5 thankyou p-2 p-sm-4">
+  <div class="thankyou jumbotron mx-lg-5 mx-3">
+    <form method="post">
+      {% csrf_token %}
+      {% for field in form %}
+      <div class="form-group col-md-11 col-lg-8 p-0">
+
+        {{ field.label_tag }}
+        {{ field|add_class:"form-control" }}
+        {{ field.errors }}
+
+      </div>
+      {% endfor %}
+      <button type="submit" class="btn btn-primary" name="submit">Take Test</button>
+    </form>
+
+  </div>
+</div>
+
+{% endblock body-content %}
+
+{% block script-content %}
+<script type="text/javascript">
+</script>
+{% endblock script-content %}

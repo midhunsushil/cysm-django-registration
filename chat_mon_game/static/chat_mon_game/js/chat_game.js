@@ -51,7 +51,7 @@ $(document).ready(function() {
     }
   });
 
-// ADD chatInfo block on chatBubble clicked
+  // ADD chatInfo block on chatBubble clicked
   function chatInfoTemplateClone(slno, from, text, answered = null) {
 
     console.log("Cloning chatInfo template")
@@ -72,7 +72,7 @@ $(document).ready(function() {
     }
   }
 
-// ADD incoming chat in CHAT BUBBLE
+  // ADD incoming chat in CHAT BUBBLE
   function chatBubbleTemplate(text, classes) {
 
     var templateContent = document.querySelector('template#chatBubble').content;
@@ -162,16 +162,20 @@ $(document).ready(function() {
     }
   });
 
-  //Close Button clicked on chatInfo
-  $("div").on("click", ".newPost .nav-item .close-btn", function() {
-
-    $container = $(this).parents("div.newPost")
+  // Function to CLOSE chatInfo container
+  function closeContainer(object) {
+    $container = $(object).parents("div.newPost")
     slno = $container.find(".content-info").attr("chat_data_slno");
     console.log("Close btn clicked #chatInfo; slno = " + slno);
     var removed = removeSelected(slno);
     if (removed) {
       $container.remove();
     }
+  }
+
+  //Close Button clicked on chatInfo
+  $("div").on("click", ".newPost .nav-item .close-btn", function() {
+    closeContainer(this);
   });
 
   //Moderation option/answer click trigger function
@@ -195,14 +199,17 @@ $(document).ready(function() {
   //Moderation options clicked
   $(document).on("click", ".newPost .nav-item .offensive-btn", function() {
     moderationBtnClicked(this, "offensive");
+    closeContainer(this);
   });
 
   $(document).on("click", ".newPost .nav-item .suspicious-btn", function() {
-    moderationBtnClicked(this, "suspicious")
+    moderationBtnClicked(this, "suspicious");
+    closeContainer(this);
   });
 
   $(document).on("click", ".newPost .nav-item .moderate-btn", function() {
     moderationBtnClicked(this, "moderate")
+    closeContainer(this);
   });
 
   $(document).on("click", ".testBtn", function() {
@@ -274,7 +281,15 @@ $(document).ready(function() {
     }
   }, 3000);
 
-  $("#submit").click(function () {
+  $('.timer').startTimer({
+    elementContainer: "span",
+    onComplete: function () {
+      submitAnswer()
+    }
+  });
+
+  function submitAnswer() {
+    // delay(1000);
     $.ajax({
       headers: {
         'X-CSRFToken': csrftoken
@@ -282,15 +297,15 @@ $(document).ready(function() {
       url: 'submitTest/',
       type: 'POST',
       data: answers,
-      success: function (data) {
-        if(data.status == 1) {
-          console.log("+score:"+data.score_plus)
-          console.log("-score:"+data.score_minus)
+      success: function(data) {
+        if (data.status == 1) {
+          console.log("+score:" + data.score_plus)
+          console.log("-score:" + data.score_minus)
           url = "test_submitted/" + data.score_plus + "/" + data.score_minus
           window.location.replace(url);
         }
       }
     });
-  });
+  }
 
 });

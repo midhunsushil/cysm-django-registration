@@ -1,6 +1,7 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.http import HttpResponse, HttpResponseForbidden, JsonResponse
 from django.conf import settings
+from chat_mon_game.forms import *
 import random, os, csv
 
 #Variable
@@ -8,6 +9,18 @@ import random, os, csv
 #Other functions
 
 # Create your views here.
+
+def test_reg(request) :
+
+    template_name = "chat_mon_game/chat_test_reg.html"
+    form = User_Reg()
+    if request.method == "POST" :
+        form = User_Reg(request.POST)
+        if form.is_valid() :
+            print("Form Valid")
+            return redirect("Test")
+    context = {"form" : form}
+    return render(request, template_name, context)
 
 def game(request) :
 
@@ -86,8 +99,8 @@ def submitTest(request):
 
             intKey = int(key)
             print(intKey)
-            correct_answer = chats[intKey-1][3]
-            answer = answers[key]
+            correct_answer = chats[intKey-1][3].lower()
+            answer = answers[key].lower()
             if(correct_answer == answer) :
                 score_plus = score_plus + 1
             else :

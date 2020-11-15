@@ -39,43 +39,6 @@
   cursor: pointer;
 }
 
-
-
-/* Scroll Bar */
-/*
- *  STYLE 7
- */
-/*.chat-container::-webkit-scrollbar-track {
-  /* background-color: #fcfcfc; *
-  border-radius: 5px;
-}
-
-.chat-container::-webkit-scrollbar {
-  width: 10px;
-  border-radius: 5px;
-  background-color: rgba(245, 245, 245, 0);
-  /* display: none; *
-  z-index: 10000;
-}
-
-.chat-container::-webkit-scrollbar:hover {
-  background-color: rgb(245, 245, 245);
-}
-
-.chat-container::-webkit-scrollbar-thumb {
-  border-radius: 5px;
-}
-
-.chat-container::-webkit-scrollbar-thumb:hover {
-  background-image: -webkit-gradient(linear,
-      left bottom,
-      left top,
-      color-stop(0.44, rgb(122, 153, 217)),
-      color-stop(0.72, rgb(73, 125, 189)),
-      color-stop(0.86, rgb(28, 58, 148)));
-}*/
-/* Scroll Bar END*/
-
 .container .jumbotron.chat-info {
   max-height: 320px;
   padding-top: 40px;
@@ -224,4 +187,25 @@
 
 .testBtn.selected {
   color: blue;
+}
+
+.timer {
+  /* display: inline-block; */
+}
+
+.jst-hours {
+  float: left;
+  display: none;
+}
+.jst-minutes {
+  /* float: left; */
+}
+.jst-seconds {
+  /* float: left; */
+}
+.jst-clearDiv {
+  clear: both;
+}
+.jst-timeout {
+  color: red;
 }

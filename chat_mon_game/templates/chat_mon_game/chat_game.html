@@ -1,170 +1,115 @@
 <!DOCTYPE html>
 <html lang="en" style="background-color: lightgray;">
+{% extends "chat_mon_game/base.html" %}
 {% load static %}
 
-<head>
-  <!-- META -->
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <!-- META END -->
+<!-- TITLE -->
+{% block title %}<title>Game</title>{% endblock %}
 
-  <!-- FAVICON -->
-  <link rel="shortcut icon" href="{% static 'favicon.ico' %}" width=16px height=16px />
+<!-- CSS -->
+{% block css %}
+<link rel="stylesheet" href="{% static "chat_mon_game\css\chat_game.css" %}">
+<link rel="stylesheet" href="{% static "chat_mon_game\css\jquery.scrollbar.css" %}">
+{% endblock css %}
+<!-- CSS END -->
 
-  <!-- TITLE -->
-  {% block title %}<title>Game</title>{% endblock %}
+<!-- JavaScript -->
+{% block js %}
+<script src="{% static "chat_mon_game\js\chat_game.js" %}"></script>
+<script src="{% static "chat_mon_game\js\jquery.scrollbar.js" %}"></script>
+<script src="{% static "chat_mon_game\js\jquery.simple.timer.js" %}"></script>
+{% endblock js %}
+<!-- JavaScript END-->
 
-  <!-- Bootstrap CDN -->
-  <script src="https://code.jquery.com/jquery-3.5.1.min.js" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
-  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
-  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
-  <!-- Bootstrap CDN END -->
-
-  <!-- FONT -->
-  <link href="https://fonts.googleapis.com/css2?family=Bubblegum+Sans&display=swap" rel="stylesheet">
-  <link href="{% static "chat_mon_game\css\fonts.css" %}" rel="stylesheet">
-
-  <!-- CSS -->
-  <link rel="stylesheet" href="{% static "chat_mon_game\css\chat_game.css" %}">
-  <link rel="stylesheet" href="{% static "chat_mon_game\css\jquery.scrollbar.css" %}">
-  <!-- CSS END -->
-
-  <!-- JavaScript -->
-  <script src="{% static "chat_mon_game\js\chat_game.js" %}"></script>
-  <script src="{% static "chat_mon_game\js\jquery.scrollbar.js" %}"></script>
-  <!-- <script src="{% static "registration\drop-zone\dropzone.js" %}"></script> -->
-  <!-- JavaScript END-->
-
-  <!-- NAVBAR -->
-  <nav class="navbar navbar-expand-sm navbar-light bg-light">
-    <a class="navbar-brand p-0" href="{% url 'index' %}">
-      <img src="{% static "registration/images/logo2.png" %}" width="auto" height="42px" class="d-inline-block align-top mx-1 mr-2" alt="" loading="lazy">
-      <!-- <span class="d-inline-block" style="margin-top:6px;">CyberSmarties</span> -->
-    </a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-  </nav>
-  <!-- NAVBAR END -->
-</head>
-
+{% block style1 %}
 <style media="screen">
-  body {
-    font-family: 'Bubblegum Sans', cursive;
-    color: black;
-    height: 100%;
-    min-height: 100vh;
-    padding-bottom: 1px;
-  }
-
-  .bg {
-    /* The image used */
-    background-image: url("https://secureservercdn.net/160.153.138.219/x82.553.myftpupload.com/wp-content/uploads/2020/05/Caribbean-beach.jpg");
-    /* background-image: url("{% static '/chat_mon_game/images/bg_img_2.png' %}"); */
-
-    /* Center and scale the image nicely */
-    background-position: bottom;
-    background-repeat: no-repeat;
-    background-size: cover;
-  }
-
-  .navbar-light .navbar-nav .nav-link {
-    font-size: 20px;
-  }
-
-  h1 {
-    color: #9900cc;
-  }
-
   .jumbotron.chat {
     height: 500px;
     position: relative;
   }
 </style>
+{% endblock style1 %}
 
-<body class="bg">
-
-  <div class="container my-2 chat">
-    <div class="jumbotron chat">
-      <div class="chat-container scrollbar-macosx w-75">
-        <template id="chatBubble">
-          <div class="bubble"></div>
-        </template>
-      </div>
-    </div>
-  </div>
-  <div class="container my-2">
-    <div class="jumbotron chat-info">
-      <button id="submit" class="testBtn" type="button" name="button">Submit Test</button>
-      <!-- Chat deatils box TEMPLATE-->
-      <template id="chatInfo">
-        <div class="row container-row newPost">
-          <div class="col">
-            <!-- Head -->
-            <div class="row justify-content-left head">
-              <div class="content-img">
-                <a href="#">
-                  <img src="{% static 'chat_mon_game/images/profile-image-1.jpg' %}" alt="" class="profileImg">
-                </a>
-              </div>
-              <div class="col content-info">
-                <p class="title">
-                  <span class="accountName">Hisaki</span> posted a new update
-                </p>
-                <p class="uploadTime">
-                  <span>5 hours ago</span>
-                  <img class="user-icon" src="{% static "chat_mon_game/images/user-icon-2.svg" %}" alt="user-icon">
-                </p>
-              </div>
-            </div>
-            <!-- Message -->
-            <div class="row">
-              <div class="col message">
-                Hi Rohit I'm tantri 19th girl from indonesian I'm sorry I pressed the phone keyboard incorrectly so I accidentally leave our chat. I hope next time u will see this messege.
-                And i hope we can meet again I wnt to say i love u too so much u are
-              </div>
-            </div>
-            <!-- Line -->
-            <div class="row">
-              <div class="hline"></div>
-            </div>
-            <!-- Option Bar -->
-            <ul class="nav">
-              <li class="nav-item">
-                <a class="nav-link btn offensive-btn">
-                  <img src="{% static "chat_mon_game/images/angry-words.svg" %}" alt="Offensive Icon">
-                  Offensive
-                </a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link btn suspicious-btn">
-                  <img src="{% static "chat_mon_game/images/suspicious.svg" %}" alt="Suspicious Icon">
-                  Suspicious
-                </a>
-              </li>
-              <li class="nav-item">
-                <a class="btn nav-link moderate-btn">
-                  <img src="{% static "chat_mon_game/images/moderate.png" %}" alt="Moderate Icon">
-                  Moderate
-                </a>
-              </li>
-              <li class="nav-item ml-auto align-right">
-                <a class="nav-link close-btn">
-                  <!-- <img src="{% static 'chat_mon_game/images/report.svg' %}" alt="Report Button"> -->
-                  <span class="close-icon">{% include "chat_mon_game/close-circle.svg" %}</span>
-                  Close
-                </a>
-              </li>
-            </ul>
-          </div>
-        </div>
+{% block body-content %}
+<div class="container my-2 chat">
+  <div class="jumbotron chat">
+    <div class="chat-container scrollbar-macosx w-75">
+      <template id="chatBubble">
+        <div class="bubble"></div>
       </template>
-      <!-- Chat deatils box template END-->
     </div>
   </div>
-
-</body>
+</div>
+<div class="container my-2">
+  <div class="jumbotron chat-info">
+    <!-- <button id="submit" class="testBtn" type="button" name="button">Submit Test</button> -->
+    <h5>Time Left ⏳ <span class="timer" data-minutes-left="0.5"></span></h5>
+    <!-- Chat deatils box TEMPLATE-->
+    <template id="chatInfo">
+      <div class="row container-row newPost">
+        <div class="col">
+          <!-- Head -->
+          <div class="row justify-content-left head">
+            <div class="content-img">
+              <a href="#">
+                <img src="{% static 'chat_mon_game/images/profile-image-1.jpg' %}" alt="" class="profileImg">
+              </a>
+            </div>
+            <div class="col content-info">
+              <p class="title">
+                <span class="accountName">Hisaki</span> posted a new update
+              </p>
+              <p class="uploadTime">
+                <span>5 hours ago</span>
+                <img class="user-icon" src="{% static "chat_mon_game/images/user-icon-2.svg" %}" alt="user-icon">
+              </p>
+            </div>
+          </div>
+          <!-- Message -->
+          <div class="row">
+            <div class="col message">
+              Hi Rohit I'm tantri 19th girl from indonesian I'm sorry I pressed the phone keyboard incorrectly so I accidentally leave our chat. I hope next time u will see this messege.
+              And i hope we can meet again I wnt to say i love u too so much u are
+            </div>
+          </div>
+          <!-- Line -->
+          <div class="row">
+            <div class="hline"></div>
+          </div>
+          <!-- Option Bar -->
+          <ul class="nav">
+            <li class="nav-item">
+              <a class="nav-link btn offensive-btn">
+                <img src="{% static "chat_mon_game/images/angry-words.svg" %}" alt="Offensive Icon">
+                Offensive
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link btn suspicious-btn">
+                <img src="{% static "chat_mon_game/images/suspicious.svg" %}" alt="Suspicious Icon">
+                Suspicious
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="btn nav-link moderate-btn">
+                <img src="{% static "chat_mon_game/images/moderate.png" %}" alt="Moderate Icon">
+                Moderate
+              </a>
+            </li>
+            <li class="nav-item ml-auto align-right">
+              <a class="nav-link close-btn">
+                <!-- <img src="{% static 'chat_mon_game/images/report.svg' %}" alt="Report Button"> -->
+                <span class="close-icon">{% include "chat_mon_game/close-circle.svg" %}</span>
+                No Action
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </template>
+    <!-- Chat deatils box template END-->
+  </div>
+</div>
+{% endblock body-content %}
 
 </html>
