@@ -18,9 +18,12 @@ from . import views
 
 urlpatterns = [
 
-    path('', views.game, name = "Test"),
-    path('reg/', views.test_reg),
-    path('getchat/', views.getChat),
-    path('submitTest/', views.submitTest),
+    path('', views.test_reg),
+    path('reg/', views.test_reg, name = "Test_Reg"),
+    path('take_test/', views.game, name = "Test"),
+    path('getchat/', views.getChat, name = "getChat"),
+    path('updateAnswer/', views.updateAnswer, name = "updateAnswer"),
+    path('submitTest/', views.submitTest, name = "submitTest"),
+    path('test_submitted/', views.submitTestResponse, name = "Test_Submitted"),
     path('test_submitted/<int:score_plus>/<int:score_minus>', views.submitTestResponse)
 ]

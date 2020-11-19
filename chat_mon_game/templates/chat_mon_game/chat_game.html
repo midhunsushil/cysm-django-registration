@@ -31,6 +31,13 @@
 {% endblock style1 %}
 
 {% block body-content %}
+<!-- URLS used in JavaScript -->
+<div>
+  <div id="url_getChat" data-url = "{% url 'getChat' %}" ></div>
+  <div id="url_submitTest" data-url = "{% url 'submitTest' %}" ></div>
+  <div id="url_testSubmitted" data-url = "{% url 'Test_Submitted' %}" ></div>
+  <div id="url_updateAnswer" data-url = "{% url 'updateAnswer' %}" ></div>
+</div>
 <div class="container my-2 chat">
   <div class="jumbotron chat">
     <div class="chat-container scrollbar-macosx w-75">
@@ -43,7 +50,7 @@
 <div class="container my-2">
   <div class="jumbotron chat-info">
     <!-- <button id="submit" class="testBtn" type="button" name="button">Submit Test</button> -->
-    <h5>Time Left ⏳ <span class="timer" data-minutes-left="0.5"></span></h5>
+    <h5>Time Left ⏳ <span class="timer" data-seconds-left="{{time_left}}"></span></h5>
     <!-- Chat deatils box TEMPLATE-->
     <template id="chatInfo">
       <div class="row container-row newPost">

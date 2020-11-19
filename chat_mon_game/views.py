@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect
 from django.http import HttpResponse, HttpResponseForbidden, JsonResponse
 from django.conf import settings
 from chat_mon_game.forms import *
-import random, os, csv
+import random, os, csv, datetime
 
 #Variable
 
@@ -14,18 +14,48 @@ def test_reg(request) :
 
     template_name = "chat_mon_game/chat_test_reg.html"
     form = User_Reg()
+    if request.method == "GET" and request.session.get("test_started", False) :
+        return redirect("Test")
     if request.method == "POST" :
         form = User_Reg(request.POST)
         if form.is_valid() :
             print("Form Valid")
+            request.session['name'] = form.cleaned_data['name']
+            request.session['email'] = form.cleaned_data['email']
+            request.session['visited_reg_page'] = True
             return redirect("Test")
     context = {"form" : form}
     return render(request, template_name, context)
 
 def game(request) :
 
-    template_name = "chat_mon_game/chat_game.html"
-    return render(request, template_name, )
+    test_time_min = 2
+    if request.method == "POST" :
+        print("answers", request.session.get("answers", False))
+        if request.session.get("answers", False) :
+            return JsonResponse(request.session.get("answers"))
+        else :
+            return JsonResponse({'errorExist' : True})
+
+    print("test sessions")
+    print(request.session.get('visited_reg_page'))
+    if (request.session.get('visited_reg_page', False)) :
+        # request.session['visited_reg_page'] = False
+
+        if request.session.get('test_started', False) == False :
+            test_end_time = datetime.datetime.now() + datetime.timedelta(minutes = test_time_min)
+            request.session['test_end_time'] = test_end_time
+
+        time_left = request.session['test_end_time'] - datetime.datetime.now()
+        time_left_seconds = int(time_left.total_seconds())
+        print("Time Left:", time_left_seconds)
+
+        request.session['test_started'] = True
+        template_name = "chat_mon_game/chat_game.html"
+        context = {"time_left" : time_left_seconds}
+        return render(request, template_name, context)
+    else :
+        return HttpResponseForbidden()
 
 def getChat(request) :
 
@@ -84,6 +114,18 @@ def getrandomChat() :
     }
     return chatData
 
+def updateAnswer(request) :
+
+    if request.method == "POST" :
+
+        data = request.POST
+        request.session['answers'] = data
+        print("ANswers: ", data)
+        if data :
+            return HttpResponse("Success")
+        else :
+            return HttpResponse("Failed")
+
 def submitTest(request):
 
     if request.method == "POST" :
@@ -117,4 +159,5 @@ def submitTestResponse(request, score_plus, score_minus):
 
     template_name = "chat_mon_game/test_submitted.html"
     context = { "score_plus" : score_plus, "score_minus" : score_minus }
+    request.session.flush()
     return render(request, template_name, context)

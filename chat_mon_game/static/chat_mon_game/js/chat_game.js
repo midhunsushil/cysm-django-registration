@@ -194,6 +194,7 @@ $(document).ready(function() {
     }
     console.log("Updated ans")
     console.log(JSON.stringify(answers))
+    updateServerAnswer();
   }
 
   //Moderation options clicked
@@ -232,7 +233,7 @@ $(document).ready(function() {
         headers: {
           'X-CSRFToken': csrftoken
         },
-        url: 'getchat/',
+        url: $("#url_getChat").attr("data-url"),
         type: 'POST',
         //AJAX request on success function
         success: function(data) {
@@ -281,6 +282,23 @@ $(document).ready(function() {
     }
   }, 3000);
 
+  $.ajax({
+    headers: {
+      'X-CSRFToken': csrftoken
+    },
+    url: '',
+    type: 'POST',
+    success: function(data) {
+      if (!data.errorExist) {
+        console.log("answers recieved!")
+        answers = data
+      }
+      else {
+        console.log("Answers does not exist!")
+      }
+    }
+  });
+
   $('.timer').startTimer({
     elementContainer: "span",
     onComplete: function () {
@@ -294,16 +312,31 @@ $(document).ready(function() {
       headers: {
         'X-CSRFToken': csrftoken
       },
-      url: 'submitTest/',
+      url: $("#url_submitTest").attr("data-url"),
       type: 'POST',
       data: answers,
       success: function(data) {
         if (data.status == 1) {
           console.log("+score:" + data.score_plus)
           console.log("-score:" + data.score_minus)
-          url = "test_submitted/" + data.score_plus + "/" + data.score_minus
+          urlhead = $("#url_testSubmitted").attr("data-url")
+          url = urlhead + data.score_plus + "/" + data.score_minus
           window.location.replace(url);
         }
+      }
+    });
+  }
+
+  function updateServerAnswer() {
+    $.ajax({
+      headers: {
+        'X-CSRFToken': csrftoken
+      },
+      url: $("#url_updateAnswer").attr("data-url"),
+      type: 'POST',
+      data: answers,
+      success: function(data) {
+        console.log(data)
       }
     });
   }
