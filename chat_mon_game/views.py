@@ -14,7 +14,14 @@ def test_reg(request) :
 
     template_name = "chat_mon_game/chat_test_reg.html"
     form = User_Reg()
-    if request.method == "GET" and request.session.get("test_started", False) :
+
+    test_started = False
+    if request.session.get("test_started") :
+        test_started = request.session.get("test_started")
+    else :
+        test_started = False
+
+    if request.method == "GET" and test_started :
         return redirect("Test")
     if request.method == "POST" :
         form = User_Reg(request.POST)
@@ -29,7 +36,7 @@ def test_reg(request) :
 
 def game(request) :
 
-    test_time_min = 2
+    test_time_min = 5
     if request.method == "POST" :
         print("answers", request.session.get("answers", False))
         if request.session.get("answers", False) :

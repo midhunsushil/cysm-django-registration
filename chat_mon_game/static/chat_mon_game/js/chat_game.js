@@ -40,7 +40,7 @@ $(document).ready(function() {
 
     // console.log("Scroll dist. from bottom: " + dispacement)
     //Sets status as scrolling and pause auto scroll
-    if (dispacement > 200) {
+    if (dispacement > 100) {
       isScrolling = true;
       // console.log("is scrolling !!");
     }
@@ -128,7 +128,7 @@ $(document).ready(function() {
   }
 
   //REMOVE ANSWER and update chatBubble class
-  function removeAnswer(slno, answer) {
+  function removeAnswer(slno) {
     delete answers[slno]
     removeBubbleClass(slno, "answered");
   }
@@ -171,11 +171,13 @@ $(document).ready(function() {
     if (removed) {
       $container.remove();
     }
+    return slno;
   }
 
   //Close Button clicked on chatInfo
   $("div").on("click", ".newPost .nav-item .close-btn", function() {
-    closeContainer(this);
+    var slno = closeContainer(this);
+    removeAnswer(slno);
   });
 
   //Moderation option/answer click trigger function
@@ -184,7 +186,7 @@ $(document).ready(function() {
     slno = $container.find(".content-info").attr("chat_data_slno");
     if ($(object).is(".selected")) {
       $(object).removeClass("selected")
-      removeAnswer(slno, answer);
+      removeAnswer(slno);
       console.log("Removed selection")
     } else {
       $container.find(".nav-item .btn").removeClass("selected")
