@@ -43,6 +43,14 @@
 .test-info h2 {
   color: #9900cc;
 }
+
+.test-info .jumbotron {
+  background-color: rgba(233, 236, 239, 0.7);
+}
+
+.test-login .jumbotron {
+  background-color: rgba(233, 236, 239, 0.7);
+}
 </style>
 {% endblock %}
 
@@ -136,8 +144,8 @@
   </div>
 <!-- Upload Instruction END -->
 
-<div class="container my-5 thankyou p-2 p-sm-4">
-  <div class="thankyou jumbotron mx-lg-5 mx-3">
+<div class="container my-5 test-login p-2 p-sm-4">
+  <div class="test-login jumbotron mx-lg-5 mx-3">
     <form method="post">
       {% csrf_token %}
       {% for field in form %}
