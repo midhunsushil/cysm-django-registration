@@ -209,3 +209,15 @@
 .jst-timeout {
   color: red;
 }
+
+.help-btn {
+  float: right;
+  margin-top: -10px;
+  /* position: relative; */
+  /* top: -3px; */
+  /* right: 10px; */
+}
+
+#testInstructionsModal .list-group-item {
+  background-color: rgba(0,0,0,0);
+}
