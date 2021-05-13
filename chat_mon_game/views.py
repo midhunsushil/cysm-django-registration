@@ -37,7 +37,7 @@ def test_reg(request) :
 
 def game(request) :
 
-    test_time_min = 1
+    test_time_min = 5
     if request.method == "POST" :
         print("answers", request.session.get("answers", False))
         if request.session.get("answers", False) :
