@@ -46,6 +46,10 @@
       </div>
       {% endfor %}
 
+      <!-- <div class="formset">
+        {{ formset.as_p }}
+      </div> -->
+
       <!-- Formset Management Form -->
       <div class="formset-management">{{ formset.management_form }}</div>
 
@@ -73,15 +77,20 @@
           {{ form.contact_number | add_class:"form-control" | attr:"placeholder:Contact Number" }}
         </div>
         <div class="col-md-1">
-          <button class="btn-clone add-form-btn" type="button" name="add/remove">
-            <span class="plus">{% include 'registration/plus-circle.svg' %}</span>
-            <span class="minus">{% include 'registration/minus-circle.svg' %}</span>
+          <button class="btn-clone add-form-btn" name="add/remove">
+            <span class="plus">{% include 'registration/svg/plus-circle.svg' %}</span>
+            <span class="minus">{% include 'registration/svg/minus-circle.svg' %}</span>
           </button>
         </div>
+        <div class="d-none">
+          {% if formset.can_delete %}
+          {{ form.DELETE }}
+          {% endif %}
+          {% for hidden in form.hidden_fields %}
+          {{ hidden }}
+          {% endfor %}
+        </div>
       </div>
-      {% if formset.can_delete %}
-      {{ form.DELETE }}
-      {% endif %}
       {% endfor %}
       <button type="submit" class="btn btn-primary" name="submit">Submit</button>
 

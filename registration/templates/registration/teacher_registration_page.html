@@ -41,22 +41,21 @@
     });
 
     // School_code value update
-    $("#id_school").change(function () {
-      var url = "";  // get the url of the `teacher_reg` view
-      var schoolId = $(this).val();  // get the selected school ID from the dropdown
+    $("#id_school").change(function() {
+      var url = ""; // get the url of the `teacher_reg` view
+      var schoolId = $(this).val(); // get the selected school ID from the dropdown
 
-      if(schoolId) {
-        $.ajax({                       // initialize an AJAX request
-          url: url,                    // set the url of the request (= self)
+      if (schoolId) {
+        $.ajax({ // initialize an AJAX request
+          url: url, // set the url of the request (= self)
           data: {
-            'school_id': schoolId       // add the school id to the GET parameters
+            'school_id': schoolId // add the school id to the GET parameters
           },
-          success: function (data) {   // `data` is the return of the `teacher_reg` view function
-            $("#id_school_code").val(data);  // replace the value of the school_code input with the data that came from the server
+          success: function(data) { // `data` is the return of the `teacher_reg` view function
+            $("#id_school_code").val(data); // replace the value of the school_code input with the data that came from the server
           }
         });
-      }
-      else {
+      } else {
         $("#id_school_code").val("Select a school");
       }
 
@@ -72,7 +71,7 @@
 
 {% block body-content %}
 <!-- FORM STARTING -->
-<form class="dropzone" method="post" enctype="multipart/form-data" >
+<form class="dropzone" method="post" enctype="multipart/form-data">
 
   {% csrf_token %}
 
@@ -91,7 +90,7 @@
 
     </div>
   </div>
-<!-- Upload Instruction -->
+  <!-- Upload Instruction -->
   <div class="container my-2 upload-info">
     <div class="jumbotron">
       <h2>Student Record Upload Instructions</h2>
@@ -139,7 +138,7 @@
             <div class="modal-dialog modal-xl">
               <div class="modal-content">
                 <div class="modal-body">
-                  <img src="{% static "registration/images/share_permission.jpg" %}" width="100%" height="auto" alt="Share Permission looks like this.." >
+                  <img src="{% static "registration/images/share_permission.jpg" %}" width="100%" height="auto" alt="Share Permission looks like this..">
                 </div>
               </div>
             </div>
@@ -154,7 +153,7 @@
       </ul>
     </div>
   </div>
-<!-- Upload Instruction END -->
+  <!-- Upload Instruction END -->
   <div class="container my-2">
     <div class="jumbotron">
       <!-- Upload Type -->
@@ -181,16 +180,18 @@
 
       </div>
       <!-- File Upload Field -->
-      <!-- <form id="fileUploadForm" method="post" enctype="multipart/form-data"> -->
-      <div class="form-group upload_type_select dropzone__box Upload" style="display: none;">
+      <div class="upload_type_select Upload" style="display: none;">
+        <h6><a href="{% static "registration/files/Student Record.xlsx" %}">Download the format template here</a></h6>
 
-        <img class="box__icon" src="{% static "/registration/images/upload-file.svg" %}" alt="Upload Icon">
-        {{ form.upload | add_class:"box__file" | attr:"data-multiple-caption:{count} files selected" | attr:"multiple"}}
-        <label for="id_upload"><strong>Choose a file</strong><span class="box__dragndrop"> or drag it here</span>.</label>
-        {{ form.upload.errors }}
+        <div class="form-group  dropzone__box">
 
+          <img class="box__icon" src="{% static "/registration/images/upload-file.svg" %}" alt="Upload Icon">
+          {{ form.upload | add_class:"box__file" | attr:"data-multiple-caption:{count} files selected" | attr:"multiple"}}
+          <label for="id_upload"><strong>Choose a file</strong><span class="box__dragndrop"> or drag it here</span>.</label>
+          {{ form.upload.errors }}
+
+        </div>
       </div>
-      <!-- </form> -->
 
       <button type="submit" class="btn btn-primary" name="submit">Submit</button>
       <p id="testpara"></p>

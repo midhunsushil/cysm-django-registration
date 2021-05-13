@@ -50,8 +50,8 @@ class EnrolmentListFilter(admin.SimpleListFilter):
 
 # Model admin class
 class SchoolAdmin(admin.ModelAdmin) :
-    list_display = ('__str__', 'verified')
-    list_filter = (EnrolmentListFilter, 'verified')
+    # list_display = ('__str__', 'verified')
+    list_filter = (EnrolmentListFilter,)
 
 class TeacherAdmin(admin.ModelAdmin) :
     list_display = ('__str__', 'verified')
@@ -63,3 +63,4 @@ admin.site.register(School_Info, SchoolAdmin)
 admin.site.register(Teacher_Info, TeacherAdmin)
 admin.site.register(Enquiry_Data)
 admin.site.register(Class_Section)
+admin.site.register(ProfileStatus)

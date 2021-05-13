@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect
 from django.http import HttpResponse, HttpResponseForbidden, JsonResponse
 from django.conf import settings
 from chat_mon_game.forms import *
+from chat_mon_game.models import UserTestScore
 import random, os, csv, datetime
 
 #Variable
@@ -27,7 +28,7 @@ def test_reg(request) :
         form = User_Reg(request.POST)
         if form.is_valid() :
             print("Form Valid")
-            request.session['name'] = form.cleaned_data['name']
+            request.session['name'] = form.cleaned_data['full_name']
             request.session['email'] = form.cleaned_data['email']
             request.session['visited_reg_page'] = True
             return redirect("Test")
@@ -36,7 +37,7 @@ def test_reg(request) :
 
 def game(request) :
 
-    test_time_min = 5
+    test_time_min = 1
     if request.method == "POST" :
         print("answers", request.session.get("answers", False))
         if request.session.get("answers", False) :
@@ -154,6 +155,11 @@ def submitTest(request):
                 score_plus = score_plus + 1
             else :
                 score_minus = score_minus + 1
+
+        name = request.session['name']
+        email = request.session['email']
+        object = UserTestScore(name=name, email=email, correct_answers=score_plus, wrong_answers=score_minus)
+        object.save()
         json_response = {
             "status" : 1,
             "message" : "Success",
