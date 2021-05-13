@@ -17,17 +17,38 @@
 
 {% block style1 %}
 <style media="screen">
-  .head.jumbotron {
+  .jumbotron {
     background-color: rgba(177, 233, 255, 0.7);
+  }
+
+  .container.my-2.head {
+    display: none;
   }
 </style>
 {% endblock style1 %}
 
-{% block jumbotron_body %}
-<h1>School Details</h1>
-{% endblock jumbotron_body %}
-
 {% block body-content %}
+
+{% if form_submitted %}
+<div class="container my-2">
+  <div class="jumbotron">
+    <h1>Form Submitted !</h1>
+  </div>
+</div>
+
+<script>
+  setTimeout(function() {
+    window.location.href = "{% url 'index' %}";
+  }, 5000);
+</script>
+
+{% else %}
+
+<div class="container my-2">
+  <div class="jumbotron">
+    <h1>School Details</h1>
+  </div>
+</div>
 <!-- FORM STARTING -->
 <form class="school-form" method="post">
 
@@ -98,7 +119,9 @@
   </div>
 </form>
 <!-- FORM ENDING -->
+{% endif %}
 {% endblock body-content %}
+
 
 <!-- JavaScript -->
 {% block script-content %}

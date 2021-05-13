@@ -86,6 +86,7 @@ def thankyou_enquiry(request) :
 @user_passes_test(school_group_check)
 def school_reg(request) :
 
+    form_submitted = False
     school_object = request.user.school_info
     form = SchoolForm(instance=school_object)
     formset = class_section_formset(instance=school_object)
@@ -109,7 +110,7 @@ def school_reg(request) :
             #     section.save()
 
             # mail(form)
-            return index(request)
+            form_submitted = True
             # Reset Form
             form = SchoolForm()
 
@@ -122,7 +123,9 @@ def school_reg(request) :
     dict = {
         'form' : form,
         'formset' : formset,
+        'form_submitted' : form_submitted,
     }
+    print(dict['form_submitted'])
     return render(request, "registration/school_registration_page.html", context = dict )
 
 @login_required
