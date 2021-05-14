@@ -8,19 +8,23 @@ $(document).ready(function() {
     if (el.name) el.name = el.name.replace(id_regex, replacement);
   }
 
-  function cloneMore(selector, prefix) {
+  function cloneMore(selector, prefix, foreignkeyField="school") {
     var newElement = $(selector).clone(true);
     var total = $('#id_' + prefix + '-TOTAL_FORMS').val();
 
     newElement.find(':input:not([type=button]):not([type=submit]):not([type=reset])').each(function() {
       if($(this).is("input")) {
-        console.log($(this))
         var name = $(this).attr('name').replace('-' + (total - 1) + '-', '-' + total + '-');
         var id = 'id_' + name;
         $(this).attr({
           'name': name,
           'id': id
-        }).val('').removeAttr('checked');
+        }).removeAttr('checked');
+
+        id_foreignkey_field = "id_" + prefix + "-" + total + "-" + foreignkeyField;
+        if($(this).attr('id') != id_foreignkey_field) {
+            $(this).val('');
+        }
       }
     });
 
@@ -50,18 +54,13 @@ $(document).ready(function() {
   function deleteForm(prefix, btn) {
     var total = parseInt($('#id_' + prefix + '-TOTAL_FORMS').val());
     if (total > 1) {
-      console.log("Inside delete()");
       btn.closest('.form-row').remove();
       var forms = $('.form-row');
       $('#id_' + prefix + '-TOTAL_FORMS').val(forms.length);
 
       for (var i = 0, formCount = forms.length; i < formCount; i++) {
         $(forms.get(i)).find(':input, label').each(function() {
-          // Original Code
           updateElementIndex(this, prefix, i);
-          // Original Code End
-          console.log($(this));
-
         });
       }
 
@@ -71,7 +70,6 @@ $(document).ready(function() {
 
   $(document).on("click", ".add-form-btn", function() {
     console.log("Cloning new form");
-    console.log($(this).attr('class'));
     cloneMore('.form-row:last', 'class_section_set');
     return false;
   });
