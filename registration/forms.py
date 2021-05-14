@@ -25,13 +25,11 @@ class_section_formset = inlineformset_factory(School_Info, Class_Section,
 
 class TeacherForm(forms.ModelForm) :
 
-    school = forms.ModelChoiceField(School_Info.objects.all(), empty_label="Select your School")
-    school_code = forms.CharField(initial = "School Code", widget = forms.TextInput(attrs={'readonly':'readonly', 'class':'disabled'}))
     upload_type = forms.ChoiceField(choices=Teacher_Info.RecordType.choices, initial=Teacher_Info.RecordType.Url, widget=forms.RadioSelect)
 
     class Meta:
         model = Teacher_Info
-        fields = ["school", "full_name", "email", "contact_number", "upload_type", "url", "upload"]
+        fields = ["full_name", "email", "contact_number", "upload_type", "url", "upload"]
 
 class EnquiryForm(forms.ModelForm) :
 

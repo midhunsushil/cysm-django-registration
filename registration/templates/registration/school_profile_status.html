@@ -121,3 +121,13 @@
 </div>
 
 {% endblock body-content %}
+
+{% block script-content %}
+<script type="text/javascript">
+  $(document).ready(function() {
+    //jquery add active page to nav-bar
+    $(".navbar-nav .nav-item.school-profile-status").addClass("active");
+
+  });
+</script>
+{% endblock script-content %}

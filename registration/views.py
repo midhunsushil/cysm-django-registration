@@ -95,7 +95,6 @@ def school_reg(request) :
     if request.method == "POST" :
 
         print("Post Request Recieved !")
-        # print(request.POST['class_section_set-2-DELETE'])
         form = SchoolForm(request.POST, instance=school_object)
         formset = class_section_formset(request.POST, instance=school_object)
 
@@ -148,7 +147,11 @@ def teacher_reg(request) :
         if form.is_valid() :
 
             print("Form Data Valid")
-            form.save()
+            teacherObject = form.save(commit=False)
+            school_object = request.user.school_info
+            teacherObject.school = school_object
+            teacherObject.save()
+
             return index(request)
             # Reset Form
             form = TeacherForm()
@@ -159,7 +162,7 @@ def teacher_reg(request) :
 
     dict = {
         'form' : form,
-        'form_teacher_details' : [form['school'], form['school_code'], form['full_name'], form['email'], form['contact_number']],
+        'form_teacher_details' : [form['full_name'], form['email'], form['contact_number']],
     }
     return render(request, "registration/teacher_registration_page.html", context = dict )
 
