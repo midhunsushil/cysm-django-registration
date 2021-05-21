@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+{% extends "chat_mon_game/base.html" %}
+{% load static %}
+
+{% block title %}<title>Test Completed</title>{% endblock title %}
+
+<!-- CSS -->
+{% block css %}
+{% endblock css %}
+<!-- CSS END -->
+
+<!-- JavaScript -->
+{% block js %}
+{% endblock js %}
+<!-- JavaScript END-->
+
+{% block style1 %}
+<style>
+  .bg {
+    background-color: #e3d3ee;
+    background-image: none;
+  }
+
+  .jumbotron.chat {
+    height: 500px;
+    position: relative;
+  }
+
+  .jumbotron.thankyou {
+    background-color: rgba(125, 125, 125, 0.5);
+    /* max-width: 816px; */
+  }
+
+  .jumbotron.thankyou h1 {
+    color: rgba(255, 255, 255, 0.8);
+  }
+
+  .jumbotron.thankyou h5 {
+    color: #fff7ff;
+  }
+
+  .jumbotron.thankyou h5 span {
+    color: #107DD5;
+  }
+
+  .jumbotron.thankyou h5 span#score_plus {
+    color: #61B60C;
+  }
+
+  .jumbotron.thankyou h5 span#score_minus {
+    color: #ff4d2e;
+  }
+
+  .container.my-2.head {
+    display: none;
+  }
+
+  .container.thankyou {
+    background-image: url("{% static '/chat_mon_game/images/chat_anim.gif' %}");
+    background-position: right center;
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-color: white;
+    /* background-color: #e3d3ee; */
+    /* padding: 50px; */
+    border-radius: 7px;
+    display: flex;
+    justify-content: center;
+  }
+</style>
+{% endblock %}
+
+{% block body-content %}
+
+<div class="container my-5 thankyou p-2 p-sm-4">
+  <div class="thankyou jumbotron mx-lg-5 mx-3">
+    <h1>Your score has been recorded.</h1>
+    <h5><span>Thank you</span> for taking the test! <br> You answered <span id="score_plus">{{score_plus}} correctly</span> and <span id="score_minus">{{score_minus}} incorrectly</span>.</h5>
+  </div>
+</div>
+
+{% endblock body-content %}
+
+{% block script-content %}
+<script type="text/javascript">
+  $(document).ready(function() {
+    var delay = 12000;
+    console.log("starting timeout");
+    window.setTimeout(function() {
+      window.location.replace('/register');
+      console.log("expired");
+    }, delay);
+  })
+</script>
+{% endblock script-content %}

@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+{% extends "chat_mon_game/base.html" %}
+{% load static %}
+{% load widget_tweaks %}
+
+{% block title %}<title>Take CS Moderation Test</title>{% endblock title %}
+
+<!-- CSS -->
+{% block css %}
+{% endblock css %}
+<!-- CSS END -->
+
+<!-- JavaScript -->
+{% block js %}
+{% endblock js %}
+<!-- JavaScript END-->
+
+{% block style1 %}
+<style>
+/* .test-info * {
+  background-color: rgba(0, 0, 0, 0.1);
+} */
+
+.test-info .list-group-flush>.list-group-item {
+    border-width: 0 0 1.7px;
+    border-color: rgba(0,0,0,.125);
+}
+
+.test-info .list-group-item .index {
+  margin-right: 7px;
+}
+
+.test-info .list-group-item {
+  display: flex;
+  justify-content: flex-start;
+  background-color: rgba(0,0,0,0);
+}
+
+.test-info .list-group-item .data {
+
+}
+
+.test-info h2 {
+  color: #9900cc;
+}
+
+.test-info .jumbotron {
+  background-color: rgba(233, 236, 239, 0.7);
+}
+
+.test-login .jumbotron {
+  background-color: rgba(233, 236, 239, 0.7);
+}
+</style>
+{% endblock %}
+
+{% block body-content %}
+
+<!-- Upload Instruction -->
+  <div class="container my-2 test-info">
+    <div class="jumbotron">
+      <h2>Test Instructions</h2>
+      <h6 class="text-secondary" style="font-family: 'Courier New'">Read the below instructions carefully before the test.
+        You can access this information anytime during the test by clicking on the Help button (The timer <span style = "color:red; font-style: italic;">will not stop</span>
+        running during this period). <strong>Do not REFRESH</strong> the page anytime during the exam period.
+      </h6>
+      {% include 'chat_mon_game/test_instructions_ul.html' %}
+    </div>
+  </div>
+<!-- Upload Instruction END -->
+
+<div class="container my-5 test-login p-2 p-sm-4">
+  <div class="test-login jumbotron mx-lg-5 mx-3">
+    <form method="post">
+      {% csrf_token %}
+      {% for field in form %}
+      <div class="form-group col-md-11 col-lg-8 p-0">
+
+        {{ field.label_tag }}
+        {{ field|add_class:"form-control" }}
+        {{ field.errors }}
+
+      </div>
+      {% endfor %}
+      <button type="submit" class="btn btn-primary" name="submit">Take Test</button>
+    </form>
+
+  </div>
+</div>
+
+{% endblock body-content %}
+
+{% block script-content %}
+<script type="text/javascript">
+</script>
+{% endblock script-content %}

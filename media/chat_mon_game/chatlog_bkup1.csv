@@ -1,0 +1,21 @@
+Sl.No.,FROM,CHAT,SENSITIVITY
+1,Tom,"Hi how are you, I am good",None
+2,Lilly,Me too just that its boring here,None
+3,Mikey,What do you do for fun ?,None
+4,Max,I don't like it when you don't play with me,Offensive
+5,Mary,I want you to stop messaging me,Suspicious
+6,Max,What did I do to you?,Suspicious
+7,Lucas,Heya... what is your favorite thing to do...,None
+8,Mary,Who wanna play games with me?,None
+9,Iris,Smash him,Offensive
+10,Jerry,I will complain to teacher,Suspicious
+11,Claire,Share me your mom's mobile number,Moderate
+12,Justin,just talk about anything,Suspicious
+13,Joan,I am sad,Moderate
+14,Serena,I can buy gifts for you if you come with me this evening,Moderate
+15,Dario,Did you do your homework?,None
+16,Maria,Share me your password,Offensive
+17,Kim,Please help me. I am dying,Suspicious
+18,Jack,You are such a loser,Offensive
+19,Rob,Your sound is so annoying. Can't listen to you anymore,Offensive
+20,Julie,Did you like my facebook profile picture?,Moderate

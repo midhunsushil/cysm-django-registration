@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en" style="background-color: lightgray;">
+{% extends "chat_mon_game/base.html" %}
+{% load static %}
+
+<!-- TITLE -->
+{% block title %}<title>CyberSmarties Monitoring Test</title>{% endblock %}
+
+<!-- CSS -->
+{% block css %}
+<link rel="stylesheet" href="{% static "chat_mon_game\css\chat_game.css" %}">
+<link rel="stylesheet" href="{% static "chat_mon_game\css\jquery.scrollbar.css" %}">
+{% endblock css %}
+<!-- CSS END -->
+
+<!-- JavaScript -->
+{% block js %}
+<script src="{% static "chat_mon_game\js\chat_game.js" %}"></script>
+<script src="{% static "chat_mon_game\js\jquery.scrollbar.js" %}"></script>
+<script src="{% static "chat_mon_game\js\jquery.simple.timer.js" %}"></script>
+{% endblock js %}
+<!-- JavaScript END-->
+
+{% block style1 %}
+<style media="screen">
+  .jumbotron.chat {
+    height: 500px;
+    position: relative;
+    padding: 2rem 2rem;
+  }
+</style>
+{% endblock style1 %}
+
+{% block body-content %}
+<!-- URLS used in JavaScript -->
+<div>
+  <div id="url_getChat" data-url="{% url 'getChat' %}"></div>
+  <div id="url_submitTest" data-url="{% url 'submitTest' %}"></div>
+  <div id="url_testSubmitted" data-url="{% url 'Test_Submitted' %}"></div>
+  <div id="url_updateAnswer" data-url="{% url 'updateAnswer' %}"></div>
+</div>
+<div class="container my-2 chat">
+  <div class="jumbotron chat">
+    <div class="chat-container scrollbar-macosx w-75">
+      <template id="chatBubble">
+        <div class="bubble"></div>
+      </template>
+    </div>
+  </div>
+</div>
+
+<!-- Help Modal -->
+<div class="modal fade" id="testInstructionsModal" tabindex="-1" aria-labelledby="#testInstructionsModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-xl">
+    <div class="modal-content">
+
+      <div class="modal-header">
+        <h5 class="modal-title" id="#testInstructionsModalLabel">Test Instructions</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="jumbotron">
+          <h6 class="text-secondary" style="font-family: 'Courier New'">The timer <span style="color:red; font-style: italic;">will not stop</span>
+            running during this period. <strong>Do not REFRESH</strong> the page anytime during the exam period.
+          </h6>
+          {% include 'chat_mon_game/test_instructions_ul.html' %}
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<div class="container my-2">
+  <div class="jumbotron chat-info">
+    <!-- <button id="submit" class="testBtn" type="button" name="button">Submit Test</button> -->
+    <div class="row">
+      <div class="col">
+        <h5>Time Left ⏳ <span class="timer" data-seconds-left="{{time_left}}"></span></h5>
+      </div>
+      <div class="col ml-auto">
+        <button class="help-btn btn btn-primary" data-toggle="modal" data-target="#testInstructionsModal">ⓘ Help</button>
+
+      </div>
+    </div>
+
+    <!-- Chat deatils box TEMPLATE-->
+    <template id="chatInfo">
+      <div class="row container-row newPost">
+        <div class="col">
+          <!-- Head -->
+          <div class="row justify-content-left head">
+            <div class="content-img">
+              <a href="#">
+                <img src="{% static 'chat_mon_game/images/profile-image-1.jpg' %}" alt="" class="profileImg">
+              </a>
+            </div>
+            <div class="col content-info">
+              <p class="title">
+                <span class="accountName">Hisaki</span> posted a new update
+              </p>
+              <p class="uploadTime">
+                <span>5 hours ago</span>
+                <img class="user-icon" src="{% static "chat_mon_game/images/user-icon-2.svg" %}" alt="user-icon">
+              </p>
+            </div>
+          </div>
+          <!-- Message -->
+          <div class="row">
+            <div class="col message">
+              Hi Rohit I'm tantri 19th girl from indonesian I'm sorry I pressed the phone keyboard incorrectly so I accidentally leave our chat. I hope next time u will see this messege.
+              And i hope we can meet again I wnt to say i love u too so much u are
+            </div>
+          </div>
+          <!-- Line -->
+          <div class="row">
+            <div class="hline"></div>
+          </div>
+          <!-- Option Bar -->
+          <ul class="nav">
+            <li class="nav-item">
+              <a class="nav-link btn offensive-btn">
+                <img src="{% static "chat_mon_game/images/angry-words.svg" %}" alt="Offensive Icon">
+                Offensive
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link btn suspicious-btn">
+                <img src="{% static "chat_mon_game/images/suspicious.svg" %}" alt="Suspicious Icon">
+                Suspicious
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="btn nav-link moderate-btn">
+                <img src="{% static "chat_mon_game/images/moderate.png" %}" alt="Moderate Icon">
+                Moderate
+              </a>
+            </li>
+            <li class="nav-item ml-auto align-right">
+              <a class="nav-link close-btn">
+                <!-- <img src="{% static 'chat_mon_game/images/report.svg' %}" alt="Report Button"> -->
+                <span class="close-icon">{% include "chat_mon_game/close-circle.svg" %}</span>
+                No Action
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </template>
+    <!-- Chat deatils box template END-->
+  </div>
+</div>
+{% endblock body-content %}
+
+</html>

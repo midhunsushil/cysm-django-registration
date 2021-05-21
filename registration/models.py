@@ -1,6 +1,8 @@
 from django.db import models
+from django.contrib.auth.models import User
 from django.core.exceptions import ValidationError
 from django.utils.translation import gettext_lazy as _
+from django.utils import timezone
 import datetime
 import os
 
@@ -30,15 +32,17 @@ def user_directory_path(instance, filename):
 
 class School_Info(models.Model) :
 
-    school_name = models.CharField(verbose_name = "School Name", max_length = 100)
-    school_code = models.CharField(max_length = 20)
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    school_name = models.CharField(max_length = 100)
+    school_code = models.CharField(max_length = 20, blank=True)
     # city = models.CharField(max_length = 20)
     # state = models.CharField(max_length = 20)
     # principal_name = models.CharField(max_length = 100)
     contact_number = models.CharField(max_length = 12, unique = True, validators = [number_check])
-    enrolments_to_CS = models.PositiveIntegerField()
-    no_of_teachers = models.PositiveIntegerField()
-    verified = models.BooleanField(default = False)
+    enrolments_to_CS = models.PositiveIntegerField(null=True, blank=True)
+    no_of_teachers = models.PositiveIntegerField(null=True ,blank=True)
+    created_at = models.DateTimeField(default = timezone.now, editable = True, blank = True)
+    # verified = models.BooleanField(default = False)
 
     def __str__(self):
         return self.school_name
@@ -50,6 +54,7 @@ class Class_Section(models.Model) :
     section = models.CharField(max_length = 3)
     teacher_email = models.EmailField(max_length = 50)
     contact_number = models.CharField(max_length = 12, validators = [number_check])
+    created_at = models.DateTimeField(default = timezone.now, editable = True, blank = True)
 
     def __str__(self) :
         # Displays Object in the form "<class_>-<section>"
@@ -60,8 +65,8 @@ class Teacher_Info(models.Model) :
 
     # Choices for upload_type
     class RecordType(models.TextChoices):
-        Upload = 'Upload', _('Upload File')
         Url = 'URL', _('Spreadsheet URL')
+        Upload = 'Upload', _('Upload File')
 
     # Teacher Info
     school = models.ForeignKey(School_Info, on_delete=models.CASCADE)
@@ -74,6 +79,7 @@ class Teacher_Info(models.Model) :
     upload = models.FileField(upload_to = user_directory_path, null = True, blank=True)
 
     verified = models.BooleanField(default = False)
+    created_at = models.DateTimeField(default = timezone.now, editable = True, blank = True)
 
     def __str__(self):
         # Displays Object in the form "<full_name> (<teacher_id>)"
@@ -95,7 +101,22 @@ class Enquiry_Data(models.Model) :
     school_name = models.CharField(verbose_name = "School Name*", max_length = 100)
     school_city = models.CharField(verbose_name = "School City*", max_length = 20)
     awareness = models.CharField(verbose_name = "Where did you hear about us ?", max_length = 100, blank = True)
+    token = models.CharField(max_length = 20, unique = True)
+    created_at = models.DateTimeField(default = timezone.now, editable = True, blank = True)
 
     def __str__(self):
         # Displays Object in the form "<IAmChoice>@<school_name>"
-        return "{0}@{1}".format(self.i_am, self.school_name)
+        return "{0}".format(self.token)
+
+class ProfileStatus(models.Model):
+
+    school = models.OneToOneField(School_Info, on_delete=models.CASCADE)
+    school_info = models.BooleanField(default = False, verbose_name="School information (Principal)")
+    class_info = models.BooleanField(default = False, verbose_name="Class information (Teacher)")
+    data_consolidation = models.BooleanField(default = False, verbose_name="Data consolidation")
+    send_data = models.BooleanField(default = False, verbose_name="Send for profile creation")
+    receive_profiles = models.BooleanField(default = False, verbose_name="Received generated user profiles")
+    redistribution = models.BooleanField(default = False, verbose_name="Redistribution of profile credentials")
+
+    def __str__(self):
+        return str(self.school)

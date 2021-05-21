@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+
+{% extends "registration/base.html" %}
+{% load static %}
+
+{% block title %}<title>School Profile Status</title>{% endblock title %}
+
+{% block css %}
+<!-- <link rel="stylesheet" href="{% static 'registration/css/index_page.css' %}"> -->
+{% endblock css %}
+
+{% block js %}
+<!-- <script src="{% static "registration/js/index_page.js" %}"></script> -->
+{% endblock js %}
+
+{% block style1 %}
+<style>
+  .bg {
+    /* background-image: url("{% static '/registration/images/bg_image_3.png' %}"); */
+    background-position: center;
+    background-repeat: no-repeat;
+    /* background-size: 400px auto; */
+    background-color: #e3d3ee;
+  }
+
+  .check-circle {
+    color: #66cd32;
+    display: inline-block;
+    width: 22px;
+  }
+
+  .cross-circle {
+    color: #F32013;
+    display: inline-block;
+    width: 22.4px;
+  }
+
+  .table td, .table th {
+    text-align: center;
+  }
+</style>
+{% endblock %}
+
+{% block jumbotron_body %}
+
+<h1>School profile creation status points</h1>
+<h5>Enquire us</h5>
+
+{% endblock %}
+
+{% block body-content %}
+
+<div class="container my-2 bg-light">
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col">School</th>
+        <th scope="col">School information (Principal)</th>
+        <th scope="col">Class information (Teacher)</th>
+        <th scope="col">Data consolidation</th>
+        <th scope="col">Send for profile creation</th>
+        <th scope="col">Received generated user profiles</th>
+        <th scope="col">Redistribution of profile credentials</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for profile_status in profile_status_datas %}
+      <tr>
+        <th scope="row">{{ profile_status.school }}</th>
+        <td>
+          {% if profile_status.school_info %}
+          <span class="check-circle">{% include 'registration/svg/check-circle-solid.svg' %}</span>
+          {% else %}
+          <span class="cross-circle">{% include 'registration/svg/cross-circle-solid.svg' %}</span>
+          {% endif %}
+        </td>
+        <td>
+          {% if profile_status.class_info %}
+          <span class="check-circle">{% include 'registration/svg/check-circle-solid.svg' %}</span>
+          {% else %}
+          <span class="cross-circle">{% include 'registration/svg/cross-circle-solid.svg' %}</span>
+          {% endif %}
+        </td>
+        <td>
+          {% if profile_status.data_consolidation %}
+          <span class="check-circle">{% include 'registration/svg/check-circle-solid.svg' %}</span>
+          {% else %}
+          <span class="cross-circle">{% include 'registration/svg/cross-circle-solid.svg' %}</span>
+          {% endif %}
+        </td>
+        <td>
+          {% if profile_status.send_data %}
+          <span class="check-circle">{% include 'registration/svg/check-circle-solid.svg' %}</span>
+          {% else %}
+          <span class="cross-circle">{% include 'registration/svg/cross-circle-solid.svg' %}</span>
+          {% endif %}
+        </td>
+        <td>
+          {% if profile_status.receive_profiles %}
+          <span class="check-circle">{% include 'registration/svg/check-circle-solid.svg' %}</span>
+          {% else %}
+          <span class="cross-circle">{% include 'registration/svg/cross-circle-solid.svg' %}</span>
+          {% endif %}
+        </td>
+        <td>
+          {% if profile_status.redistribution %}
+          <span class="check-circle">{% include 'registration/svg/check-circle-solid.svg' %}</span>
+          {% else %}
+          <span class="cross-circle">{% include 'registration/svg/cross-circle-solid.svg' %}</span>
+          {% endif %}
+        </td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+
+{% endblock body-content %}
+
+{% block script-content %}
+<script type="text/javascript">
+  $(document).ready(function() {
+    //jquery add active page to nav-bar
+    $(".navbar-nav .nav-item.school-profile-status").addClass("active");
+
+  });
+</script>
+{% endblock script-content %}
