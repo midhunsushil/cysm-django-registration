@@ -146,25 +146,60 @@
   h1 {
     color: #9900cc;
   }
+  .footer {
+    width: 100%;
+    text-align: center;
+    background-color: #4c288e;
+    font-family: 'Rubik', sans-serif;
+    z-index: 1000;
+  }
+
+  .footer .copyright {
+    max-width: 1140px;
+    width: 100%;
+    margin: 0 auto;
+    font-weight: 400;
+  }
+
+  .footer .copyright-text {
+    color: #f4b3c1;
+    font-size: 14px;
+    letter-spacing: 1px;
+    line-height: 16px;
+    float: left;
+    padding: 25px 0 20px;
+    opacity: .8;
+  }
 </style>
 
 {% block style1 %}
 {% endblock %}
 
-<body class="bg">
+<body class="bg d-flex flex-column h-100">
 
   {% block navbar %}
 
   {% endblock %}
-  <div class="container my-2 head">
-    <div class="jumbotron head">
-      {% block jumbotron_body %}
-      {% endblock %}
+  <main role="main" class="flex-shrink-0">
+    <div class="container my-2 head">
+      <div class="jumbotron head">
+        {% block jumbotron_body %}
+        {% endblock %}
+      </div>
     </div>
-  </div>
 
-  {% block body-content %}
-  {% endblock body-content %}
+    {% block body-content %}
+    {% endblock body-content %}
+  </main>
+
+  <footer class="footer mt-auto">
+    <div class="container">
+      <div class="copyright">
+          <span class="copyright-text">Copyrights @2021: CyberSmarties - The Safe Social Network Training Platform for Kids | <a href='{% static "registration/files/Cybersmarties.in- Terms & Conditions - 2021.pdf" %}' title="Terms &amp; Conditions"
+              style="color:#ffffff;">Terms &amp; Conditions</a></span>
+        </div>
+    </div>
+  </footer>
 </body>
 
 </html>
