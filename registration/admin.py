@@ -52,15 +52,20 @@ class EnrolmentListFilter(admin.SimpleListFilter):
 class SchoolAdmin(admin.ModelAdmin) :
     # list_display = ('__str__', 'verified')
     list_filter = (EnrolmentListFilter,)
+    search_fields = ['school_name', 'school_code']
 
 class TeacherAdmin(admin.ModelAdmin) :
     list_display = ('__str__', 'verified')
     list_filter = ('school', 'verified')
+    search_fields = ['school__school_name', 'full_name']
+
+class ClassSectionAdmin(admin.ModelAdmin) :
+    search_fields = ['school__school_name', 'teacher_email']
 
 # Register your models here.
 # admin.site.register(School_Info)
 admin.site.register(School_Info, SchoolAdmin)
 admin.site.register(Teacher_Info, TeacherAdmin)
 admin.site.register(Enquiry_Data)
-admin.site.register(Class_Section)
+admin.site.register(Class_Section, ClassSectionAdmin)
 admin.site.register(ProfileStatus)
