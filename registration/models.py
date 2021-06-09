@@ -102,6 +102,7 @@ class Enquiry_Data(models.Model) :
     school_city = models.CharField(verbose_name = "School City*", max_length = 20)
     awareness = models.CharField(verbose_name = "Where did you hear about us ?", max_length = 100, blank = True)
     token = models.CharField(max_length = 20, unique = True)
+    attended = models.BooleanField(default = False)
     created_at = models.DateTimeField(default = timezone.now, editable = True, blank = True)
 
     def __str__(self):

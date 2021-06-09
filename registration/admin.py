@@ -62,10 +62,14 @@ class TeacherAdmin(admin.ModelAdmin) :
 class ClassSectionAdmin(admin.ModelAdmin) :
     search_fields = ['school__school_name', 'teacher_email']
 
+class EnquiryAdmin(admin.ModelAdmin) :
+    list_display = ('__str__', 'attended')
+    list_filter = ('attended',)
+
 # Register your models here.
 # admin.site.register(School_Info)
 admin.site.register(School_Info, SchoolAdmin)
 admin.site.register(Teacher_Info, TeacherAdmin)
-admin.site.register(Enquiry_Data)
+admin.site.register(Enquiry_Data, EnquiryAdmin)
 admin.site.register(Class_Section, ClassSectionAdmin)
 admin.site.register(ProfileStatus)
