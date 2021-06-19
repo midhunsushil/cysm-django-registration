@@ -20,8 +20,8 @@ Registration page for CyberSmarties India
 
 ### What is Web Server Gateway Interface?
 
-Web Server Gateway Interface (WSGI)is just an ***interface\*** specification with which, the ***server and application communicate.\***
-A WSGI server (meaning WSGI compliant) only ***receives the request from the client, passes it to the application and then sends the response\*** returned by the application to the client. It is only used for Python Programming Language.
+Web Server Gateway Interface (WSGI)is just an ***interface*** specification with which, the ***server and application communicate.***
+A WSGI server (meaning WSGI compliant) only ***receives the request from the client, passes it to the application and then sends the response*** returned by the application to the client. It is only used for Python Programming Language.
 
 An HTTP web server’s primary task is to receive a request, and serve HTTP files in response. [**Apache**](https://httpd.apache.org/) is an example of an HTTP web server.
 The caveat here is that that Apache at its core, is designed to serve only HTTP requests. This is where different modules for Apache comes in. These modules help Apache perform various functions.
@@ -34,7 +34,7 @@ A module called [**mod-wsgi**](https://modwsgi.readthedocs.io/) will be used to 
 
 - You should have a fresh latest Ubuntu server instance with a non-root user with `sudo` privileges configured and running.
 - SSH connection to your server.
-- Security Group configured to allow all access to port 22(SSH), 80(HTTP), 443(HTTPS) and 8000(testing Django development server) 
+- Security Group configured to allow all access to port 22(SSH), 80(HTTP), 443(HTTPS) and 8000(testing Django development server)
 
 
 
@@ -83,7 +83,7 @@ This will create a directory call `mydjangoenv` within our Django directory.
 
 Before we will install our project’s Python requirements, we need to activate the virtual environment.
 
-We can do this by typing: 
+We can do this by typing:
 
 ```shell
 source /home/ubuntu/django/mydjangoenv/bin/activate
@@ -166,7 +166,7 @@ We can collect all of the static content into the directory location we configur
 python manage.py collectstatic
 ```
 
- You will have to confirm the operation. The static files will be placed in a directory called `static` within your project directory. 
+ You will have to confirm the operation. The static files will be placed in a directory called `static` within your project directory.
 
 ### Run Development Server
 
@@ -260,7 +260,7 @@ WSGIScriptAlias / /home/ubuntu/django/registration/CySm/wsgi.py
 
 - The directory tags are used to give Apache server the permission to access the respective directory and its files.
 
-- The WSGI settings are required for the Django server to work. `python-home` is set to path of virtual environment. 
+- The WSGI settings are required for the Django server to work. `python-home` is set to path of virtual environment.
 
 - Please make sure the paths are correct and according to naming of directories and files in the Django project.
 
@@ -422,7 +422,7 @@ If you **do not** have a domain name for your application and are using this for
 
 ## What is Let's Encrypt
 
-<img src="https://letsencrypt.org/images/le-logo-twitter-noalpha.png" alt="Let's Encrypt" style="zoom:40%; margin-left: auto;margin-right: auto;" />
+<p align="center"><img src="https://letsencrypt.org/images/le-logo-twitter-noalpha.png" alt="Let's Encrypt" width="400" /></p>
 
 Let’s Encrypt is a Certificate Authority (CA) that facilitates obtaining and installing free [TLS/SSL certificates](https://www.digitalocean.com/community/tutorials/openssl-essentials-working-with-ssl-certificates-private-keys-and-csrs), thereby enabling encrypted HTTPS on web servers. It simplifies the process by providing a software client, Certbot, that attempts to automate most (if not all) of the required steps. Currently, the entire process of obtaining and installing a certificate is fully automated on both Apache and Nginx.
 
@@ -434,8 +434,8 @@ In this guide, we’ll use [Certbot](https://certbot.eff.org/) to obtain a free 
 
 To follow this tutorial, you will need:
 
-- Django deployed with Apache on Ubuntu server instance set up by following this [Deploying Django with Apache and mod_wsgi on Ubuntu](#deploying-django-with-apache-and-mod_wsgi-on-ubuntu) tutorial, including a sudo non-root user and a firewall. 
-- A fully registered domain name. This tutorial will use **your_domain **(eg. cybersmarties.com) as an example throughout. 
+- Django deployed with Apache on Ubuntu server instance set up by following this [Deploying Django with Apache and mod_wsgi on Ubuntu](#deploying-django-with-apache-and-mod_wsgi-on-ubuntu) tutorial, including a sudo non-root user and a firewall.
+- A fully registered domain name. This tutorial will use **your_domain **(eg. cybersmarties.com) as an example throughout.
 - Allow all access to HTTPS port 443 in server settings.
 - Static IPv4 address for the server instance. In AWS this is called [Elastic IP](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/elastic-ip-addresses-eip.html)
 - Basic nano(command line text editor) usage since there will be some editing 😒.
@@ -457,7 +457,7 @@ If you have **AWS** hosting follow this [How to Link Your Domain Name With AWS E
 
 If you have **DigitalOcean** follow [this introduction to DigitalOcean DNS](https://www.digitalocean.com/community/tutorials/an-introduction-to-digitalocean-dns) for details.
 
-We recommend creating new Apache virtual host files for each domain hosted in a server, because it helps to avoid common mistakes and maintains the default configuration files as a fallback setup. 
+We recommend creating new Apache virtual host files for each domain hosted in a server, because it helps to avoid common mistakes and maintains the default configuration files as a fallback setup.
 
 So we will change the name of the virtual host file we previously created `/etc/apache2/sites-available/registration.cybersmarties.in.conf` to `/etc/apache2/sites-available/your_domain.conf`. Run the following commands to do this:
 
@@ -498,9 +498,9 @@ You should get a `Syntax OK` as a response. Restart Apache so that the changes t
 sudo systemctl restart apache2
 ```
 
-Make sure you **add your_domain and www.your_domain to ALLOWED_HOSTS** in `settings.py` file. Read this [section](#adjust-the-project-settings) for instruction. 
+Make sure you **add your_domain and www.your_domain to ALLOWED_HOSTS** in `settings.py` file. Read this [section](#adjust-the-project-settings) for instruction.
 
-With these changes, you should now be able to access your Django site by going to your server’s domain name like this `http://your_domain/` or `http://www.your_domain/` . 
+With these changes, you should now be able to access your Django site by going to your server’s domain name like this `http://your_domain/` or `http://www.your_domain/` .
 
 ***Note*** *that it is still HTTP and not HTTPS so we are not done yet. You can see that the site says its not secure (no 🔒) in the URL bar. For HTTPS to work we need to get an SSL Certificate. We will see that in the next section.*
 
@@ -586,7 +586,7 @@ Which names would you like to activate HTTPS for?
 2: www.your_domain
 - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 Select the appropriate numbers separated by commas and/or spaces, or leave input
-blank to select all options shown (Enter 'c' to cancel): 
+blank to select all options shown (Enter 'c' to cancel):
 ```
 
 You’ll see output like this:
@@ -727,4 +727,3 @@ If you see no errors, you’re all set. When necessary, Certbot will renew your 
 If your reading this then you’ve installed the Let’s Encrypt client `certbot`, configured and installed an SSL certificate for your domain, and confirmed that Certbot’s automatic renewal service is active within `systemctl` ✌️. If you have further questions about using Certbot, [their documentation](https://certbot.eff.org/docs/) is a good place to start.
 
 ------
-
