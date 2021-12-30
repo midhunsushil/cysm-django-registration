@@ -52,12 +52,24 @@ $(document).ready(function() {
   });
 
   // ADD chatInfo block on chatBubble clicked
-  function chatInfoTemplateClone(slno, from, text, answered = null) {
+  function chatInfoTemplateClone(slno, from, text, sentiment, prob, answered = null) {
 
-    console.log("Cloning chatInfo template")
+    console.log("Cloning chatInfo template" + " " + sentiment)
+
+    var sentiment_text = "";
+    var sentiment_class = "";
+    if(sentiment == 1) {
+      sentiment_class = "positive"
+      sentiment_text = (prob*100) + "% POSITIVE";
+    } else {
+      sentiment_class = "negative"
+      sentiment_text = (prob*100) + "% NEGATIVE";
+    }
 
     var templateContent = document.querySelector('template#chatInfo').content;
     $(templateContent).find(".newPost .content-info .accountName").text(from);
+    $(templateContent).find(".newPost .content-info .sentiment").removeClass("positive negative").addClass(sentiment_class);
+    $(templateContent).find(".newPost .content-info .sentiment").text(sentiment_text);
     $(templateContent).find(".newPost .content-info").attr({
       "chat_data_slno": slno
     });
@@ -149,16 +161,18 @@ $(document).ready(function() {
       slno: $inputInfo.attr('chat_data_slno'),
       from: $inputInfo.attr('chat_data_from'),
       text: $inputInfo.attr('chat_data_text'),
-      mod: $inputInfo.attr('chat_data_mod')
+      mod: $inputInfo.attr('chat_data_mod'),
+      sentiment: $inputInfo.attr('chat_data_sentiment'),
+      prob: $inputInfo.attr('chat_data_sentiment_prob')
     }
 
     addSelected(data.slno);
     //Selecting answered chat
     if (answers[data.slno]) {
       // console.log("Selecting answered chat")
-      chatInfoTemplateClone(data.slno, data.from, data.text, answers[data.slno]);
+      chatInfoTemplateClone(data.slno, data.from, data.text, data.sentiment, data.prob, answers[data.slno]);
     } else {
-      chatInfoTemplateClone(data.slno, data.from, data.text);
+      chatInfoTemplateClone(data.slno, data.from, data.text, data.sentiment, data.prob);
     }
   });
 
@@ -258,7 +272,9 @@ $(document).ready(function() {
               'chat_data_slno': data.slno,
               'chat_data_from': data.from,
               'chat_data_text': data.chat,
-              'chat_data_mod': data.moderation
+              'chat_data_mod': data.moderation,
+              'chat_data_sentiment': data.prediction,
+              'chat_data_sentiment_prob' : data.prob
             }).appendTo('.chat-container .current');
 
             var $chatContainer = $('.chat-container.scroll-content')[0]

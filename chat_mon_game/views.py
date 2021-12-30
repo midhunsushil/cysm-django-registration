@@ -1,8 +1,10 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse, HttpResponseForbidden, JsonResponse
 from django.conf import settings
+from django.urls import reverse
 from chat_mon_game.forms import *
 from chat_mon_game.models import UserTestScore
+import requests
 import random, os, csv, datetime
 
 #Variable
@@ -69,7 +71,8 @@ def getChat(request) :
 
         if request.method == "POST":
 
-            chatData = getrandomChat()
+            chatData = getrandomChat(request)
+            print("api call sending", chatData)
             if(chatData) :
                 return JsonResponse(chatData)
             else :
@@ -104,15 +107,15 @@ def getChats() :
 
         # get total number of rows
         no_of_rows = csvreader.line_num-1
-        print("Total no. of chats read:", no_of_rows)
+        # print("Total no. of chats read:", no_of_rows)
 
         return [rows, no_of_rows]
 
-def getrandomChat() :
+def getrandomChat(request) :
 
     chats, no_of_rows = getChats()
     randChat = random.randint(0,no_of_rows-1)
-    print("randchat:", randChat)
+    # print("randchat:", randChat)
 
     chatData = {
         'slno' : chats[randChat][0],
@@ -120,6 +123,15 @@ def getrandomChat() :
         'chat' : chats[randChat][2],
         'moderation' : chats[randChat][3],
     }
+    sentiment_api = request.build_absolute_uri(reverse('predictor:predict')) + "?tweet=" + chatData['chat']
+    sentiment = requests.get(sentiment_api)
+    sentiment = sentiment.json()
+    print(sentiment)
+    chatData['prediction'] = sentiment['prediction']
+    if(chatData['prediction'] == 1) :
+        chatData['prob'] = sentiment['pos_prob']
+    else :
+        chatData['prob'] = sentiment['neg_prob']
     return chatData
 
 def updateAnswer(request) :

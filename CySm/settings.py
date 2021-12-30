@@ -57,6 +57,8 @@ INSTALLED_APPS = [
     'widget_tweaks',
     'registration',
     'chat_mon_game',
+    'predictor',
+    'rest_framework'
 ]
 
 MIDDLEWARE = [

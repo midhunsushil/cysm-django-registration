@@ -221,3 +221,13 @@
 #testInstructionsModal .list-group-item {
   background-color: rgba(0,0,0,0);
 }
+
+/* Sentiment Analysis */
+.newPost .head .content-info .title span.sentiment.positive {
+  color: blue;
+}
+
+.newPost .head .content-info .title span.sentiment.negative {
+  color: red;
+}
+/* Sentiment Analysis END */

@@ -19,9 +19,11 @@ class ClassSectionForm(forms.ModelForm) :
 
 # Formset of above Form
 # class_section_formset = formset_factory(ClassSectionForm, extra = 1)
-class_section_formset = inlineformset_factory(School_Info, Class_Section,
-    fields=("class_no", "section", "teacher_email", "contact_number"),
-    extra=1, can_delete=True)
+class_section_formset = inlineformset_factory(School_Info,
+                                              Class_Section,
+                                              fields=("class_no", "section", "teacher_email", "contact_number"),
+                                              extra=1, 
+                                              can_delete=True)
 
 class TeacherForm(forms.ModelForm) :
 
