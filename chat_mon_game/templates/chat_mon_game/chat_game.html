@@ -16,7 +16,6 @@
 <!-- JavaScript -->
 {% block js %}
 <script src="{% static "chat_mon_game\js\chat_game.js" %}"></script>
-<script src="{% static "chat_mon_game\js\jquery.scrollbar.js" %}"></script>
 <script src="{% static "chat_mon_game\js\jquery.simple.timer.js" %}"></script>
 {% endblock js %}
 <!-- JavaScript END-->
@@ -41,7 +40,7 @@
 </div>
 <div class="container my-2 chat">
   <div class="jumbotron chat">
-    <div class="chat-container scrollbar-macosx w-75">
+    <div class="chat-container w-75">
       <template id="chatBubble">
         <div class="bubble"></div>
       </template>
